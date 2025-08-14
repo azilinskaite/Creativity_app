@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import React from "react";
 import { Cal_Sans } from "next/font/google";
-import Link from 'next/link';
 import "./globals.css";
+import Navbar from "../components/Navbar";
 
 const calSans = Cal_Sans({
   subsets: ["latin"],
@@ -24,13 +24,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={calSans.className}>
       <body>
-        <nav>
-          <ul>
-            <li><Link href="/">Home</Link></li>
-            <li><Link href="/profile">Profile</Link></li>
-            <li><Link href="/challenges">Challenges</Link></li>
-          </ul>
-        </nav>
+        <Navbar/>
         <main>{children}</main>
       </body>
     </html>
