@@ -2,19 +2,16 @@ import LoginBox from "@/components/LoginBox";
 
 export default function Home() {
   return (
-    <section className="relative min-h-screen">
-      <div
+    <section className="relative flex items-center min-h-screen p-[2rem] md:p-[6rem]">
+      {/* <div
         className="absolute inset-0 bg-cover bg-center"
         style={{ backgroundImage: "url('/photolink.jpg')" }}
-      ></div>
-
-      <div className="relative z-10 flex items-center justify-end min-h-screen px-8">
-        <div className="max-w-lg mr-10">
-          <h1 className="text-5xl font-bold mb-6">
-            Parctice Your Creativity
-          </h1>
-          <LoginBox />
-        </div>
+      ></div> */}
+      <div className="z-10 w-full flex items-center flex-col justify-between md:flex-row">
+        <h1 className="py-4 max-w-lg text-5xl text-center font-bold mr-6 md:text-left">
+          Get into the groove of creativity
+        </h1>
+        <LoginBox />
       </div>
     </section>
   );

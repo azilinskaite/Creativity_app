@@ -1,8 +1,9 @@
 import React from "react";
+import Button from "./Button";
 
-export default function LoginBox() {
+export default function LoginBox({ onLogin, onSignup }: { onLogin?: () => void; onSignup?: () => void }) {
   return (
-    <div className="bg-white bg-opacity-80 p-6 border rounded-3xl max-w-sm">
+    <div className="bg-white bg-opacity-80 p-8 border rounded-2xl max-w-sm">
       <input
         type="email"
         placeholder="Email"
@@ -13,9 +14,9 @@ export default function LoginBox() {
         placeholder="Password"
         className="w-full mb-3 p-2 border rounded-xl"
       />
-      <button type="submit">Log In</button>
-      <h3>If you&#39;re new here</h3>
-      <button type="button">Sign Up</button>
+      <Button onClick={onLogin}>Log In</Button>
+      <h3 className="my-4 text-center">...or if you&#39;re new here</h3>
+      <Button variant="secondary" onClick={onSignup}>Sign Up</Button>
     </div>
   );
 }
