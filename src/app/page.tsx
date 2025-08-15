@@ -7,7 +7,7 @@ import RegisterBox from "@/components/RegisterBox";
 export default function Home() {
   const [isSignupOpen, setSignupOpen] = useState(false);
   return (
-    <section className="relative flex items-center min-h-screen p-[2rem] md:p-[6rem]">
+    <div className="relative flex items-center min-h-screen p-[2rem] md:p-[6rem]">
       {/* <div
         className="absolute inset-0 bg-cover bg-center"
         style={{ backgroundImage: "url('/photolink.jpg')" }}
@@ -24,6 +24,6 @@ export default function Home() {
       <Modal isOpen={isSignupOpen} onClose={() => setSignupOpen(false)}>
         <RegisterBox onRegister={() => console.log("register")} />
       </Modal>
-    </section>
+    </div>
   );
 }
