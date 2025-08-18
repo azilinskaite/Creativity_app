@@ -1,11 +1,14 @@
 import React from "react";
+import SectionHeader from "@/components/SectionHeader";
+import Moodboard from "@/components/Moodboard/Moodboard";
 
 export default function ProfilePage() {
   return (
     <div>
-      <h2 className="text-3xl font-bold text-[var(--foreground)] bg-[var(--fuschia)] px-[2rem] py-[1rem]">
-        Hi [username] !
-      </h2>
+      <SectionHeader bg="bg-[var(--fuschia)]">Hi [username]!</SectionHeader>
+      <Moodboard/>
+      <SectionHeader>Achievements</SectionHeader>
+      <SectionHeader>Gallery</SectionHeader>
     </div>
   );
 }
