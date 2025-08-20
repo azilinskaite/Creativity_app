@@ -1,0 +1,46 @@
+{
+  "disciplines":[
+  {
+    "discipline": "painting",
+    "color": "#F1F506",
+    "challenges": [ "1", "2", "3" ],
+    "progress": 0,
+    "achievements": [ "1", "2", "3" ]
+  },
+  {
+    "discipline": "drawing",
+    "color": "#8956BB",
+    "challenges": [ "1", "2", "3" ],
+    "progress": 0,
+    "achievements": [ "1", "2", "3" ]
+  },
+  {
+    "discipline": "writing",
+    "color": "#39F590",
+    "challenges": [ "1", "2", "3" ],
+    "progress": 0,
+    "achievements": [ "1", "2", "3" ]
+  },
+  {
+    "discipline": "photography",
+    "color": "#4987FF",
+    "challenges": [ "1", "2", "3" ],
+    "progress": 0,
+    "achievements": [ "1", "2", "3" ]
+  },
+  {
+    "discipline": "styling",
+    "color": "#72CBFF",
+    "challenges": [ "1", "2", "3" ],
+    "progress": 0,
+    "achievements": [ "1", "2", "3" ]
+  },
+  {
+    "discipline": "sculpting",
+    "color": "#FF91F0",
+    "challenges": [ "1", "2", "3" ],
+    "progress": 0,
+    "achievements": [ "1", "2", "3" ]
+  }
+]
+}
