@@ -36,7 +36,7 @@ export default function CurrentChallenge() {
     <>
     <section className="bg-white grid grid-cols-2">
       <div className="p-[2rem]">
-        <h5 className="mb-[2rem]">Part of: {discipline.discipline}</h5>
+        <h5 className="mb-[1rem]">Part of: {discipline.discipline}</h5>
         <ChallengeBox challenge={challenge} />
       </div>
       <ChallengeSubmitBox onGetChallenge={handleGetChallenge} />
