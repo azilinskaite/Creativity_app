@@ -13,7 +13,7 @@ export default function Home() {
         style={{ backgroundImage: "url('/bg_krisjanis_kazaks.jpg')" }}
       ></div>
       <div className="z-10 w-full flex items-center flex-col justify-between md:flex-row">
-        <h1 className="py-4 max-w-lg text-5xl text-center font-bold mr-6 md:text-left">
+        <h1 className="py-4 max-w-lg text-6xl text-[var(--foreground)] text-center font-bold mr-6 md:text-left">
           Get into the groove of creativity
         </h1>
         <LoginBox

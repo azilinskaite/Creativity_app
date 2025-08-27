@@ -23,3 +23,4 @@ export const SignUp: Story = {
     variant: "secondary",
   },
 };
+
