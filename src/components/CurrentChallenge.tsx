@@ -34,9 +34,12 @@ export default function CurrentChallenge() {
 
   return (
     <>
-      <section className="bg-white grid grid-cols-2">
-        <div className="p-[2rem]">
-          <h5 className="mb-[1rem]">Part of: {discipline.discipline}</h5>
+      <section className="bg-white grid grid-cols-1 md:grid-cols-2">
+        <div className="p-[2rem] py-[1rem] pt-[1rem] mb-[1rem] md:py-[2rem]">
+          <h5 className="mb-[1rem]" style={{ textTransform: "capitalize" }}>
+            Part of: {discipline.discipline}
+          </h5>
+
           <ChallengeBox challenge={challenge} color={discipline.color} />
         </div>
         <ChallengeSubmitBox onGetChallenge={handleGetChallenge} />

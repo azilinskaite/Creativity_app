@@ -8,7 +8,7 @@ export default function ProfilePage() {
     <div>
       <SectionHeader bg="bg-[var(--fuschia)]">Hi [username]!</SectionHeader>
       <div className="p-[2rem] bg-white">
-      <p className="max-w-[65ch]">&quot;Here, you&apos;ll find challenges designed to spark your creativity and sharpen your mind. Choose a discipline that interests you, complete a challenge, and then snap a photo of your work to upload. Over time, you&apos;ll build your own personal gallery showcasing your progress and achievements.&quot;</p>
+      <p className="max-w-[70ch]">&quot;Here, you&apos;ll find challenges designed to spark your creativity and sharpen your mind. Choose a discipline that interests you, complete a challenge, and then snap a photo of your work to upload. Over time, you&apos;ll build your own personal gallery showcasing your progress and achievements.&quot;</p>
       </div>
       <SectionHeader>Current challenge</SectionHeader>
       <CurrentChallenge />

@@ -10,7 +10,7 @@ export default function Button({
   ...props
 }: ButtonProps) {
   const base =
-    "w-full py-2 rounded-xl font-semibold transition focus:outline-none";
+    "w-full py-2 border-2 rounded-xl font-semibold transition focus:outline-none";
   const variants = {
     primary: "bg-[var(--foreground)] text-white hover:bg-[var(--bright-red)]",
     secondary: "bg-[var(--background)] text-[var(--foreground)] border hover:bg-white",
