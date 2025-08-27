@@ -2,10 +2,19 @@ import React from "react";
 
 type ChallengeBoxProps = {
   challenge?: string;
+  color?: string;
 };
 
-export default function ChallengeBox({ challenge }: ChallengeBoxProps) {
-    return (
-        <div className="bg-white bg-opacity-80 p-8 border rounded-2xl h-[9rem]">{challenge ?? "Generated challenge"}</div>
-    )
+export default function ChallengeBox({
+  challenge,
+  color = "#fff",
+}: ChallengeBoxProps) {
+  return (
+    <div
+      className="p-8 border-2 rounded-2xl h-[9rem]"
+      style={{ backgroundColor: color }}
+    >
+      {challenge ?? "Generated challenge"}
+    </div>
+  );
 }
