@@ -5,12 +5,11 @@ import Link from "next/link";
 import Image from "next/image";
 
 export default function Navbar() {
-  // const [isMenuOpen, setIsMenuOpen] = useState(false);
-  // const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <nav className="bg-white w-full px-[2rem] py-[1rem] flex flex-col items-center md:flex-row md:justify-between md:items-center">
-      <div className="flex w-full flex-row justify-between">
+    <nav className="bg-white w-full px-8 py-4 flex items-center justify-between">
+      <div className="flex w-full md:w-auto flex-row justify-between items-center">
         <Image
           src="/Ripple_logo.png"
           alt="Site Logo"
@@ -18,17 +17,20 @@ export default function Navbar() {
           height={33}
           style={{ width: "80px", height: "33px", objectFit: "contain" }}
         />
-        <div className="md:hidden">
-          <Hamburger
-            size={24}
-            // toggled={isMenuOpen}
-            // toggle={setIsMenuOpen}
-          />
+        <div className="overflow-hidden h-[33px] w-[33px] flex items-center justify-center md:w-[0px]">
+          <Hamburger size={22} toggled={isMenuOpen} toggle={setIsMenuOpen} />
         </div>
       </div>
 
-      <ul className="w-full flex flex-col gap-[1rem] md:flex-row md:justify-end md:gap-[2rem]">
-        <hr className="border-1 border-black mt-[0.5rem] md:hidden" />
+      <ul
+        className={`
+  fixed top-16 left-0 w-full h-full bg-white z-50
+  flex flex-col gap-4 px-8 transition-transform duration-500
+  ${isMenuOpen ? "transform translate-x-0" : "transform -translate-x-full"}
+  md:static md:flex-row md:h-auto md:w-auto md:bg-transparent md:px-0 md:gap-8 md:transform-none md:justify-end
+`}
+      >
+        <hr className="border-1 border-black md:hidden" />
         <li className="transition-[1s] md:hover:-rotate-15">
           <Link href="/">Home</Link>
         </li>
