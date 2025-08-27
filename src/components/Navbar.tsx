@@ -8,7 +8,7 @@ export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <nav className="bg-white w-full px-8 py-4 flex items-center justify-between">
+    <nav className="bg-[var(--beige)] w-full px-8 py-4 flex items-center justify-between">
       <div className="flex w-full md:w-auto flex-row justify-between items-center">
         <Image
           src="/Ripple_logo.png"

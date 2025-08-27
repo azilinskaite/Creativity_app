@@ -7,11 +7,11 @@ import RegisterBox from "@/components/RegisterBox";
 export default function Home() {
   const [isSignupOpen, setSignupOpen] = useState(false);
   return (
-    <div className="relative flex items-center min-h-screen p-[2rem] md:p-[6rem]">
-      {/* <div
-        className="absolute inset-0 bg-cover bg-center"
-        style={{ backgroundImage: "url('/photolink.jpg')" }}
-      ></div> */}
+    <div className="relative h-full flex items-center p-[2rem] md:p-[6rem]">
+      <div
+        className="absolute inset-0 w-full h-full bg-center bg-cover"
+        style={{ backgroundImage: "url('/bg_krisjanis_kazaks.jpg')" }}
+      ></div>
       <div className="z-10 w-full flex items-center flex-col justify-between md:flex-row">
         <h1 className="py-4 max-w-lg text-5xl text-center font-bold mr-6 md:text-left">
           Get into the groove of creativity

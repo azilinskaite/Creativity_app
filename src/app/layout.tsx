@@ -23,9 +23,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={calSans.className}>
-      <body>
-        <Navbar/>
-        <main>{children}</main>
+      <body className="min-h-screen flex flex-col">
+        <Navbar />
+        <main style={{ height: "calc(100vh - 4rem)" }} className="flex-grow">
+          {children}
+        </main>
       </body>
     </html>
   );
