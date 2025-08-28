@@ -1,11 +1,13 @@
 "use client";
 import React, { useState } from "react";
+import toast from "react-hot-toast";
 import ChallengeBox from "./ChallengeBox";
 import ChallengeSubmitBox from "./ChallengeSubmitBox";
 import disciplinesData from "@/data/disciplines.json";
 import Modal from "./Modal";
 import Button from "./Button";
 import Image from "next/image";
+import { saveSubmission } from "@/utils/localStorage";
 
 export default function CurrentChallenge() {
   const [selectedDisciplineIndex, setSelectedDisciplineIndex] = useState(0);
@@ -51,6 +53,18 @@ export default function CurrentChallenge() {
     setIsModalOpen(false);
   };
 
+  function handleSaveSubmission() {
+    if (!uploadedImage) return;
+    saveSubmission({
+      discipline: discipline.discipline,
+      challenge: challenge,
+      imageData: uploadedImage,
+    });
+    toast.success("Submission saved!");
+    setSubmitModalOpen(false);
+    setUploadedImage(null);
+  }
+
   return (
     <>
       <section className="bg-white grid grid-cols-1 md:grid-cols-2">
@@ -65,6 +79,7 @@ export default function CurrentChallenge() {
           onSubmitChallenge={handleOpenSubmitModal}
           onGetChallenge={handleGetChallenge}
         />
+
         <Modal isOpen={isSubmitModalOpen} onClose={handleCloseSubmitModal}>
           <div className="flex flex-col items-center gap-4">
             <input
@@ -86,7 +101,7 @@ export default function CurrentChallenge() {
             )}
             <Button
               variant="primary"
-              // onClick={save to local storage}
+              onClick={handleSaveSubmission}
               size="short"
             >
               Save

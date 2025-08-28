@@ -14,7 +14,8 @@
     "hamburger-react": "^2.5.2",
     "next": "15.4.6",
     "react": "19.1.0",
-    "react-dom": "19.1.0"
+    "react-dom": "19.1.0",
+    "react-hot-toast": "^2.6.0"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^4.1.0",

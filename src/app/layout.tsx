@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import React from "react";
 import { Cal_Sans } from "next/font/google";
 import "./globals.css";
+import { Toaster } from "react-hot-toast";
 import Navbar from "../components/Navbar";
 
 const calSans = Cal_Sans({
@@ -27,6 +28,7 @@ export default function RootLayout({
         <Navbar />
         <main style={{ height: "calc(100vh - 4rem)" }} className="flex-grow">
           {children}
+          <Toaster position="top-center" />
         </main>
       </body>
     </html>
