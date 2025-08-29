@@ -22,3 +22,15 @@ export function saveSubmission(submission: Submission) {
     localStorage.setItem("submissions", JSON.stringify(submissions));
   }
 }
+
+export function calculateProgress(
+  disciplineName: string,
+  totalChallenges: number,
+  submissions: Submission[]
+) {
+  const doneCount = submissions.filter(
+    (sub) => sub.discipline === disciplineName
+  ).length;
+
+  return Math.min(100, (doneCount / totalChallenges) * 100);
+}
