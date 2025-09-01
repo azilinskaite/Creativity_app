@@ -2,6 +2,7 @@ export type Submission = {
   discipline: string;
   challenge: string;
   imageData: string;
+  comment?: string;
 };
 
 export function getSubmissions(): Submission[] {

@@ -19,6 +19,7 @@ export default function CurrentChallenge() {
   const discipline = disciplinesData.disciplines[selectedDisciplineIndex];
   const challenge = discipline.challenges[selectedChallengeIndex];
   const [uploadedImage, setUploadedImage] = useState<string | null>(null);
+  const [comment, setComment] = useState("");
 
   function handleImageFileChange(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
@@ -59,10 +60,12 @@ export default function CurrentChallenge() {
       discipline: discipline.discipline,
       challenge: challenge,
       imageData: uploadedImage,
+      comment: comment.trim(),
     });
     toast.success("Submission saved!");
     setSubmitModalOpen(false);
     setUploadedImage(null);
+    setComment("");
   }
 
   return (
@@ -88,6 +91,13 @@ export default function CurrentChallenge() {
               onChange={handleImageFileChange}
               className="border p-2 rounded-md"
             />
+            <textarea
+              value={comment}
+              onChange={(e) => setComment(e.target.value)}
+              placeholder="Thoughts about the challenge"
+              className="border p-2 rounded-md w-full max-w-md"
+              rows={3}
+            />
             {uploadedImage && (
               <div className="relative w-64 h-64 rounded-lg overflow-hidden">
                 <Image
@@ -103,6 +113,7 @@ export default function CurrentChallenge() {
               variant="primary"
               onClick={handleSaveSubmission}
               size="short"
+              disabled={!uploadedImage}
             >
               Save
             </Button>

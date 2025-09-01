@@ -14,12 +14,12 @@ export default function LoginBox({
       <input
         type="email"
         placeholder="Email"
-        className="w-full mb-3 p-2 border-2 rounded-xl"
+        className="w-full mb-3 p-2 border rounded-xl"
       />
       <input
         type="password"
         placeholder="Password"
-        className="w-full mb-3 p-2 border-2 rounded-xl"
+        className="w-full mb-3 p-2 border rounded-xl"
       />
       <Link href="/profile" passHref>
         <Button variant="secondary" onClick={onLogin}>
