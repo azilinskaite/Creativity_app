@@ -15,7 +15,7 @@ export default function Button({
   ...props
 }: ButtonProps) {
   const base =
-    "py-2 border-2 rounded-xl font-semibold transition focus:outline-none";
+    "py-2 border rounded-xl font-semibold transition focus:outline-none";
   const width = size === "full" ? "w-full" : "w-auto";
   const padding = size === "short" ? "px-[2rem]" : "";
   const variants = {

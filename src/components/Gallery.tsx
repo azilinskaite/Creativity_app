@@ -1,24 +1,43 @@
-import React from "react";
+"use client";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import { getSubmissions } from "@/utils/localStorage";
+import { Submission, getSubmissions } from "@/utils/localStorage";
 
 export default function Gallery() {
-  const submissions = getSubmissions();
+  const [submissions, setSubmissions] = useState<Submission[]>([]);
+
+  useEffect(() => {
+    setSubmissions(getSubmissions());
+  }, []);
+
+  const slotsCount = Math.max(1, submissions.length);
 
   return (
-    <section className="p-[2rem]">
-      <div className="grid grid-cols-3 gap-2 md:grid-cols-6">
-        {submissions.map((sub, i) => {
-  console.log("Submission", i, sub);
-  return sub.imageData ? (
-    <img
-      key={i}
-      src={sub.imageData}
-      alt={`${sub.discipline} - ${sub.challenge}`}
-      className="object-cover w-full h-full aspect-square rounded border"
-    />
-  ) : null;
-})}
+    <section className="pt-[1rem] bg-white">
+      <div className="grid grid-cols-3 gap-2 md:grid-cols-5">
+        {Array.from({ length: slotsCount }).map((_, i) => {
+          const sub = submissions[i];
+          return (
+            <div
+              key={i}
+              className="relative aspect-3/4 overflow-hidden"
+            >
+              {sub && sub.imageData ? (
+                <Image
+                  src={sub.imageData}
+                  alt={`${sub.discipline} - ${sub.challenge}`}
+                  fill
+                  style={{ objectFit: "cover" }}
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />
+              ) : (
+                <span className="text-gray-300 flex items-center justify-center h-full">
+                  No image
+                </span>
+              )}
+            </div>
+          );
+        })}
       </div>
     </section>
   );
