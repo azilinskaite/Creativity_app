@@ -29,8 +29,8 @@ export default function Navbar() {
       {pathname !== "/" && (
         <ul
           className={`
-    fixed top-16 left-0 w-full h-full bg-white z-50
-    flex flex-col gap-4 px-8 transition-transform duration-500
+    fixed top-16 left-0 w-full h-full z-50
+    flex flex-col gap-4 px-8 bg-[var(--beige)] transition-transform duration-500
     ${isMenuOpen ? "translate-x-0" : "-translate-x-full"}
     md:static md:flex-row md:h-auto md:w-auto md:bg-transparent md:px-0 md:gap-8 md:translate-x-0 md:justify-end
   `}

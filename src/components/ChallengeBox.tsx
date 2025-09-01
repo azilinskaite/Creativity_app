@@ -7,14 +7,15 @@ type ChallengeBoxProps = {
 
 export default function ChallengeBox({
   challenge,
-  color = "#fff",
+  color = "white",
 }: ChallengeBoxProps) {
   return (
     <div
-      className="p-8 border-2 rounded-2xl h-[9rem]"
+      className="p-8 rounded-2xl h-[9rem]"
       style={{ backgroundColor: color }}
-    >
+    >&quot;
       {challenge ?? "Generated challenge"}
+      &quot;
     </div>
   );
 }
