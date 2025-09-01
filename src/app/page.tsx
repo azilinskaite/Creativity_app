@@ -14,7 +14,7 @@ export default function Home() {
       ></div>
       <div className="z-10 w-full flex items-center flex-col justify-between md:flex-row">
         <h1 className="py-4 max-w-lg text-6xl text-[var(--foreground)] text-center font-bold mr-6 md:text-left">
-          Get into the groove of creativity
+          Get on the wave of creativity
         </h1>
         <LoginBox
           onLogin={() => console.log("login")}

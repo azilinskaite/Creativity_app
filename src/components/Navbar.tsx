@@ -12,13 +12,15 @@ export default function Navbar() {
   return (
     <nav className="bg-[var(--beige)] w-full px-8 py-4 flex items-center justify-between">
       <div className="flex items-center justify-between w-full md:w-auto">
-        <Image
-          src="/Ripple_logo.png"
-          alt="Site Logo"
-          width={80}
-          height={33}
-          style={{ width: "80px", height: "33px", objectFit: "contain" }}
-        />
+        <Link href="/">
+          <Image
+            src="/Ripple_logo.png"
+            alt="Site Logo"
+            width={80}
+            height={33}
+            style={{ width: "80px", height: "33px", objectFit: "contain" }}
+          />
+        </Link>
         <div className="md:hidden flex items-center justify-center h-[33px] w-[33px]">
           <Hamburger size={22} toggled={isMenuOpen} toggle={setIsMenuOpen} />
         </div>
