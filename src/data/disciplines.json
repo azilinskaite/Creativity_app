@@ -3,45 +3,38 @@
   {
     "discipline": "painting",
     "color": "#F1F506",
-    "challenges": [ "Paint a landscape/view that you see at golden hour.", "Make an abstract painting listening to your favourite song of this week. What strokes and colors does it bring?", "What's the most disguisting thing you have ever eaten? Paint it in a glorifying way.", "Paint and object or an animal that doesn't exist." ],
-    "progress": 0,
-    "achievements": [ "1", "2", "3" ],
-    "background": ""
+    "challenges": [ "Paint a landscape or a view that you see at a golden hour.", "Make an abstract painting listening to your favourite song of this week. What strokes and colors does it bring?", "What's the most disguisting thing you have ever eaten? Paint it in a glorifying way.", "Paint and object or an animal that doesn't exist." ],
+    "background": "https://i.postimg.cc/4354Mv9H/painting-mirella-bruno.jpg"
   },
   {
     "discipline": "drawing",
     "color": "#8956BB",
     "challenges": [ "Sketch a still life of your living room.", "Capture a feeling of a live flower. It doesn't have to be realistic.", "Draw a 1 or 2 page comic for your close friend. With you as characters.", "Take an A4 piece of paper. Draw as if you were 5 years old again" ],
-    "progress": 0,
-    "achievements": [ "1", "2", "3" ]
+    "background": "https://i.postimg.cc/sXgfRBY6/drawing.png"
   },
   {
     "discipline": "writing",
     "color": "#39F590",
     "challenges": [ "Write a letter to a dear friend.", "Find a headline in a newspaper and write a 2-page fictional story based on it.", "Write a poem about an emotion you feel today.", "Write about your day using as many adjectives as you can find." ],
-    "progress": 0,
-    "achievements": [ "1", "2", "3" ]
+    "background": "https://i.postimg.cc/j2GRNZGm/writing.png"
   },
   {
     "discipline": "photography",
     "color": "#4987FF",
     "challenges": [ "Photograph your most meaningful corner.", "Take a black & white self portrait. Any props and experimental lighting are welcome.", "Go outside and take a lot of quick photos in 15min. Pick one that's your favourite. ", "Take photo of something provocative." ],
-    "progress": 0,
-    "achievements": [ "1", "2", "3" ]
+    "background": "https://i.postimg.cc/g0dkNtnP/photography-Valerie-Chiang.jpg"
   },
   {
     "discipline": "styling",
     "color": "#72CBFF",
     "challenges": [ "Style an outfit with 2 pieces you haven't worn in at least 6 months. Someting you forgot you had, the older the better.", "Style a monochrome outfit. Only shades of the same color are allowed.", "Dress up like someone you are attracted to.", "Find a picture of yourself as a kid. Try to recreate shapes or colors of the outfit with something you would feel comfortable wearing today." ],
-    "progress": 0,
-    "achievements": [ "1", "2", "3" ]
+    "background": "https://i.postimg.cc/pTcWV2k2/styling.png"
   },
   {
     "discipline": "sculpting",
     "color": "#FF91F0",
     "challenges": [ "Make a sculpture of a body part. It can be a part that you love or hate or don't care about. Large or small, but as realistic as possible.", "Create a replica of your favourite furniture piece in clay.", "Build a symbol for your current wish as a manifestation. Money? Love? New job? You decide. It can be abstract or realistic.", "Make your dream candle holder." ],
-    "progress": 0,
-    "achievements": [ "1", "2", "3" ]
+    "background": "https://i.postimg.cc/Fzf972n0/sculpture.png"
   }
 ]
 }

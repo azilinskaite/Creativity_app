@@ -47,3 +47,11 @@ export function getMoodboardImages(): (string | null)[] {
   if (!stored) return Array(6).fill(null);
   return JSON.parse(stored);
 }
+
+// type Achievement = {
+//   id: string;
+//   discipline: string;
+//   name: string;
+//   dateEarned: string;
+//   iconUrl: string;
+// };

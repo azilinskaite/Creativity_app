@@ -9,7 +9,7 @@ export default function Home() {
   return (
     <div className="relative h-full flex items-center p-[2rem] md:p-[6rem]">
       <div
-        className="absolute inset-0 w-full h-full bg-center bg-cover"
+        className="absolute inset-0 w-full h-full bg-center bg-cover opacity-85"
         style={{ backgroundImage: "url('/bg_krisjanis_kazaks.jpg')" }}
       ></div>
       <div className="z-10 w-full flex items-center flex-col justify-between md:flex-row">

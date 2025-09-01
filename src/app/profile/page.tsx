@@ -7,7 +7,7 @@ import Gallery from "@/components/Gallery";
 export default function ProfilePage() {
   return (
     <div>
-      <SectionHeader bg="bg-[var(--fuschia)]">Hi [username]!</SectionHeader>
+      <SectionHeader bg="bg-[var(--fuschia)]">Hi user!</SectionHeader>
       <Moodboard/>
       <SectionHeader>Achievements</SectionHeader>
       <Achievements/>

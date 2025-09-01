@@ -81,6 +81,7 @@ export default function CurrentChallenge() {
         <ChallengeSubmitBox
           onSubmitChallenge={handleOpenSubmitModal}
           onGetChallenge={handleGetChallenge}
+          background={discipline.background}
         />
 
         <Modal isOpen={isSubmitModalOpen} onClose={handleCloseSubmitModal}>
