@@ -1,25 +1,39 @@
 "use client";
-
-import React, { useState } from "react";
-import dynamic from "next/dynamic";
+import React, { useState, useEffect } from "react";
 import MoodboardGrid from "./MoodboardGrid";
 import Button from "../Button";
+import dynamic from "next/dynamic";
+import { getMoodboardImages, saveMoodboardImages } from "@/utils/localStorage";
 
 const MoodboardAddModal = dynamic(() => import("./MoodboardAddModal"), {
   ssr: false,
 });
 
 export default function Moodboard() {
+  const [isClient, setIsClient] = useState(false);
+  const [images, setImages] = useState<(string | null)[]>([]);
   const [isEditOpen, setEditOpen] = useState(false);
-  const [images, setImages] = useState<Array<string | null>>(
-    Array(6).fill(null)
-  );
+
+  useEffect(() => {
+    setIsClient(true);
+    setImages(getMoodboardImages());
+  }, []);
+
+  useEffect(() => {
+    if (isClient) {
+      saveMoodboardImages(images);
+    }
+  }, [images, isClient]);
 
   return (
     <section className="p-[2rem] pt-[1rem] bg-white">
       <div className="flex justify-between items-center mb-[1rem]">
         <h5>Current inspirations</h5>
-        <Button variant="secondary" size="short" onClick={() => setEditOpen(true)}>
+        <Button
+          variant="secondary"
+          size="short"
+          onClick={() => setEditOpen(true)}
+        >
           Edit
         </Button>
       </div>

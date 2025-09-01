@@ -1,6 +1,5 @@
 "use client";
-
-import React, { useRef } from "react";
+import React from "react";
 import Button from "../Button"; 
 
 interface Props {
@@ -11,19 +10,22 @@ interface Props {
 }
 
 export default function MoodboardAddModal({ isOpen, onClose, images, setImages }: Props) {
-  const fileInputs = useRef<(HTMLInputElement | null)[]>([]);
 
   if (!isOpen) return null;
 
-  const handleImageChange = (idx: number, e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      const url = URL.createObjectURL(file);
+  function handleImageChange (idx: number, e: React.ChangeEvent<HTMLInputElement>) {
+  const file = e.target.files?.[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = () => {
+      const base64 = reader.result as string;
       const newImages = [...images];
-      newImages[idx] = url;
+      newImages[idx] = base64;
       setImages(newImages);
-    }
-  };
+    };
+    reader.readAsDataURL(file);
+  }
+}
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50">
