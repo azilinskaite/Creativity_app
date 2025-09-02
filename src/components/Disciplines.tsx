@@ -14,7 +14,7 @@ export default function Disciplines() {
   }, []);
 
   return (
-    <section className="bg-white grid grid-cols-2 gap-[1rem] p-[1rem] md:grid-cols-4 md:gap-0 md:p-0">
+    <section className="bg-white grid grid-cols-2 md:grid-cols-4 md:gap-0 md:p-0">
       {disciplinesData.disciplines.map((d, idx) => {
         const progressPercent = calculateProgress(
           d.discipline,

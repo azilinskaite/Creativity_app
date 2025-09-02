@@ -10,7 +10,7 @@ export default function Navbar() {
   const pathname = usePathname();
 
   return (
-    <nav className="bg-[var(--beige)] w-full px-8 py-2 flex items-center justify-between">
+    <nav className="bg-[var(--beige)] w-full px-[1rem] py-2 flex items-center justify-between md:px-1rem">
       <div className="flex items-center justify-between w-full md:w-auto">
         <Link href="/">
           <Image
@@ -30,7 +30,7 @@ export default function Navbar() {
         <ul
           className={`
     fixed top-15 left-0 w-full h-full z-50
-    flex flex-col gap-4 px-8 bg-[var(--beige)] transition-transform duration-500
+    flex flex-col gap-4 px-[1rem] bg-[var(--beige)] transition-transform duration-500
     ${isMenuOpen ? "translate-x-0" : "-translate-x-full"}
     md:static md:flex-row md:h-auto md:w-auto md:bg-transparent md:px-0 md:gap-8 md:translate-x-0 md:justify-end
   `}

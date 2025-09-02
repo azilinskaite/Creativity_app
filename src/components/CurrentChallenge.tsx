@@ -71,7 +71,7 @@ export default function CurrentChallenge() {
   return (
     <>
       <section className="bg-white grid grid-cols-1 md:grid-cols-2">
-        <div className="p-[2rem] py-[1rem] pt-[1rem] mb-[1rem] md:py-[2rem]">
+        <div className="p-[1rem] mb-[1rem] md:p-[2rem]">
           <h5 className="mb-[1rem]" style={{ textTransform: "capitalize" }}>
             Part of: {discipline.discipline}
           </h5>

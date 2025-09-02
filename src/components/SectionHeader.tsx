@@ -9,7 +9,7 @@ export default function SectionHeader({
 }) {
   return (
     <h2
-      className={`text-2xl font-bold text-[var(--foreground)] px-[2rem] py-[0.8rem] ${
+      className={`text-2xl font-bold text-[var(--foreground)] px-[1rem] py-[0.8rem] md:px-[2rem] ${
         bg ?? "bg-[var(--background)]"
       }`}
     >
