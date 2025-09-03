@@ -10,7 +10,7 @@ export default function Navbar() {
   const pathname = usePathname();
 
   return (
-    <nav className="bg-[var(--beige)] w-full px-[1rem] py-2 flex items-center justify-between md:px-1rem">
+    <nav className="bg-[var(--beige)] w-full px-[1rem] py-2 flex items-center justify-between md:px-[2rem]">
       <div className="flex items-center justify-between w-full md:w-auto">
         <Link href="/">
           <Image
@@ -37,13 +37,13 @@ export default function Navbar() {
         >
           <hr className="border-1 border-black md:hidden" />
           <li className="md:hover:-rotate-15">
-            <Link href="/profile">Profile</Link>
+            <Link href="/profile" onClick={() => setIsMenuOpen(false)}>Profile</Link>
           </li>
           <li className="md:hover:-rotate-15">
-            <Link href="/challenges">Challenges</Link>
+            <Link href="/challenges" onClick={() => setIsMenuOpen(false)}>Challenges</Link>
           </li>
           <li className="md:hover:-rotate-15">
-            <Link href="/">Sign Out</Link>
+            <Link href="/" onClick={() => setIsMenuOpen(false)}>Sign Out</Link>
           </li>
         </ul>
       )}
