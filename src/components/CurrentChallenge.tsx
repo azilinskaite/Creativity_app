@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import toast from "react-hot-toast";
 import ChallengeBox from "./ChallengeBox";
 import ChallengeSubmitBox from "./ChallengeSubmitBox";
@@ -8,21 +8,44 @@ import Modal from "./Modal";
 import Button from "./Button";
 import Image from "next/image";
 import { saveSubmission } from "@/utils/localStorage";
+import usePendingChallenge from "@/hooks/usePendingChallenge";
 
 export default function CurrentChallenge() {
-  const [challengeVisible, setChallengeVisible] = useState(false);
+  const { pendingChallenge, savePending, clearPending } = usePendingChallenge();
 
-  const [selectedDisciplineIndex, setSelectedDisciplineIndex] = useState(-1);
-  const [selectedChallengeIndex, setSelectedChallengeIndex] = useState(-1);
+  const selectedDisciplineIndex = pendingChallenge?.disciplineIndex ?? -1;
+  const selectedChallengeIndex = pendingChallenge?.challengeIndex ?? -1;
+
+  const [challengeVisible, setChallengeVisible] = useState(false);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSubmitModalOpen, setSubmitModalOpen] = useState(false);
 
-  const discipline = disciplinesData.disciplines[selectedDisciplineIndex];
-  const challenge = discipline?.challenges[selectedChallengeIndex];
+  const discipline =
+    selectedDisciplineIndex >= 0
+      ? disciplinesData.disciplines[selectedDisciplineIndex]
+      : null;
+
+  const challenge =
+    discipline && selectedChallengeIndex >= 0
+      ? discipline.challenges[selectedChallengeIndex]
+      : null;
 
   const [uploadedImage, setUploadedImage] = useState<string | null>(null);
   const [comment, setComment] = useState("");
+
+  useEffect(() => {
+    if (
+      selectedDisciplineIndex >= 0 &&
+      selectedChallengeIndex >= 0 &&
+      discipline &&
+      challenge
+    ) {
+      setChallengeVisible(true);
+    } else {
+      setChallengeVisible(false);
+    }
+  }, [selectedDisciplineIndex, selectedChallengeIndex, discipline, challenge]);
 
   function handleImageFileChange(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
@@ -50,17 +73,15 @@ export default function CurrentChallenge() {
 
   const handleDisciplineSelect = (index: number) => {
     const selected = disciplinesData.disciplines[index];
-    setSelectedDisciplineIndex(index);
     const randomChallengeIndex = Math.floor(
       Math.random() * selected.challenges.length
     );
-    setSelectedChallengeIndex(randomChallengeIndex);
+    savePending(index, randomChallengeIndex);
     setIsModalOpen(false);
-    setChallengeVisible(true);
   };
 
   function handleSaveSubmission() {
-    if (!uploadedImage) return;
+    if (!uploadedImage || !discipline || !challenge) return;
     saveSubmission({
       discipline: discipline.discipline,
       challengeId: challenge.id,
@@ -72,9 +93,7 @@ export default function CurrentChallenge() {
     setSubmitModalOpen(false);
     setUploadedImage(null);
     setComment("");
-    setChallengeVisible(false);
-    setSelectedDisciplineIndex(-1);
-    setSelectedChallengeIndex(-1);
+    clearPending();
   }
 
   return (
