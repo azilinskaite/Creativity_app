@@ -7,11 +7,26 @@ type ChallengeSubmitBoxProps = {
   background: string;
 };
 
-export default function ChallengeSubmitBox({ onGetChallenge, onSubmitChallenge, background }: ChallengeSubmitBoxProps) {
-    return (
-        <div className="px-[2rem] py-[3rem] mb:pt-[3rem] flex flex-col align-center justify-center gap-[1rem] md:p-[2rem]" style={{ backgroundImage: `url(${background})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
-            <Button variant="primary" onClick={onSubmitChallenge}>Submit</Button>
-            <Button variant="primary" onClick={onGetChallenge}>Get challenge</Button>
-        </div>
-    )
+export default function ChallengeSubmitBox({
+  onGetChallenge,
+  onSubmitChallenge,
+  background,
+}: ChallengeSubmitBoxProps) {
+  return (
+    <div
+      className="px-[2rem] py-[3rem] mb:pt-[3rem] flex flex-col align-center justify-center gap-[1rem] md:p-[2rem]"
+      style={{
+        backgroundImage: `url(${background})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+    >
+      <Button variant="primary" onClick={onGetChallenge}>
+        Start a challenge
+      </Button>
+      <Button variant="primary" onClick={onSubmitChallenge}>
+        Submit challenge
+      </Button>
+    </div>
+  );
 }

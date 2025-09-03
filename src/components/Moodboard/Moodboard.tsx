@@ -26,7 +26,7 @@ export default function Moodboard() {
   }, [images, isClient]);
 
   return (
-    <section className="p-[1rem] pt-[1rem] bg-white md:p-[2rem]">
+    <section className="p-[1rem] bg-white md:px-[2rem]">
       <div className="flex justify-between items-center mb-[1rem]">
         <h5>Current inspirations</h5>
         <Button

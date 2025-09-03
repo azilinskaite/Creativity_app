@@ -10,14 +10,17 @@ import Image from "next/image";
 import { saveSubmission } from "@/utils/localStorage";
 
 export default function CurrentChallenge() {
-  const [selectedDisciplineIndex, setSelectedDisciplineIndex] = useState(0);
-  const [selectedChallengeIndex, setSelectedChallengeIndex] = useState(0);
+  const [challengeVisible, setChallengeVisible] = useState(false);
+
+  const [selectedDisciplineIndex, setSelectedDisciplineIndex] = useState(-1);
+  const [selectedChallengeIndex, setSelectedChallengeIndex] = useState(-1);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSubmitModalOpen, setSubmitModalOpen] = useState(false);
 
   const discipline = disciplinesData.disciplines[selectedDisciplineIndex];
-  const challenge = discipline.challenges[selectedChallengeIndex];
+  const challenge = discipline?.challenges[selectedChallengeIndex];
+
   const [uploadedImage, setUploadedImage] = useState<string | null>(null);
   const [comment, setComment] = useState("");
 
@@ -33,6 +36,7 @@ export default function CurrentChallenge() {
   const handleGetChallenge = () => {
     setIsModalOpen(true);
   };
+
   const handleCloseModal = () => {
     setIsModalOpen(false);
   };
@@ -52,13 +56,15 @@ export default function CurrentChallenge() {
     );
     setSelectedChallengeIndex(randomChallengeIndex);
     setIsModalOpen(false);
+    setChallengeVisible(true);
   };
 
   function handleSaveSubmission() {
     if (!uploadedImage) return;
     saveSubmission({
       discipline: discipline.discipline,
-      challenge: challenge,
+      challengeId: challenge.id,
+      challengeText: challenge.text,
       imageData: uploadedImage,
       comment: comment.trim(),
     });
@@ -66,23 +72,35 @@ export default function CurrentChallenge() {
     setSubmitModalOpen(false);
     setUploadedImage(null);
     setComment("");
+    setChallengeVisible(false);
+    setSelectedDisciplineIndex(-1);
+    setSelectedChallengeIndex(-1);
   }
 
   return (
     <>
       <section className="bg-white grid grid-cols-1 md:grid-cols-2">
-        <div className="p-[1rem] mb-[1rem] md:p-[2rem]">
-          <h5 className="mb-[1rem]" style={{ textTransform: "capitalize" }}>
-            Part of: {discipline.discipline}
-          </h5>
-
-          <ChallengeBox challenge={challenge} color={discipline.color} />
-        </div>
         <ChallengeSubmitBox
           onSubmitChallenge={handleOpenSubmitModal}
           onGetChallenge={handleGetChallenge}
-          background={discipline.background}
+          background={discipline?.background ?? "var(--beige)"}
         />
+        <div className="p-[1rem] mb-[1rem] md:p-[2rem]">
+          <h5 className="mb-[1rem]" style={{ textTransform: "capitalize" }}>
+            Part of: {discipline?.discipline ?? "No discipline selected"}
+          </h5>
+          {challengeVisible && challenge ? (
+            <ChallengeBox
+              challenge={challenge.text}
+              color={discipline?.color ?? "white"}
+            />
+          ) : (
+            <ChallengeBox
+              challenge="No challenge selected"
+              color={discipline?.color ?? "var(--beige)"}
+            />
+          )}
+        </div>
 
         <Modal isOpen={isSubmitModalOpen} onClose={handleCloseSubmitModal}>
           <div className="flex flex-col items-center gap-4">
@@ -96,7 +114,7 @@ export default function CurrentChallenge() {
               value={comment}
               onChange={(e) => setComment(e.target.value)}
               placeholder="Thoughts about the challenge"
-              className="border p-2 rounded-md w-full max-w-md"
+              className="border p-2 rounded-md w-full max-w-sm"
               rows={3}
             />
             {uploadedImage && (

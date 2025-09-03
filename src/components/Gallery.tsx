@@ -24,14 +24,14 @@ export default function Gallery() {
                   <div className="relative w-full aspect-2/3">
                     <Image
                       src={sub.imageData}
-                      alt={`${sub.discipline} - ${sub.challenge}`}
+                      alt={`${sub.discipline} - ${sub.challengeId}`}
                       fill
                       style={{ objectFit: "cover" }}
                       sizes="(max-width: 768px) 100vw, 50vw"
                     />
                   </div>
                   {sub.comment && (
-                    <p className="text-sm italic text-center mt-[1rem] truncate">
+                    <p className="text-sm italic text-left mt-[1rem]">
                       {sub.comment}
                     </p>
                   )}

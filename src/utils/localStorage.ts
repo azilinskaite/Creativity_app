@@ -1,6 +1,7 @@
 export type Submission = {
   discipline: string;
-  challenge: string;
+  challengeText: string;
+  challengeId: string;
   imageData: string;
   comment?: string;
 };
@@ -16,7 +17,7 @@ export function saveSubmission(submission: Submission) {
   const submissions = getSubmissions();
   const exists = submissions.some(
     (s) =>
-      s.discipline === submission.discipline && s.challenge === submission.challenge
+      s.discipline === submission.discipline && s.challengeText === submission.challengeText
   );
   if (!exists) {
     submissions.push(submission);
