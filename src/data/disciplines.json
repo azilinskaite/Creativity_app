@@ -9,7 +9,7 @@
         { "id": "painting-3", "text": "What's the most disguisting thing you have ever eaten? Paint it in a glorifying way." },
         { "id": "painting-4", "text": "Paint and object or an animal that doesn't exist." }
       ],
-      "background": "/images/painting-mirella-bruno.jpg"
+      "background": "/images/painting_mirella_bruno.jpg"
     },
     {
       "discipline": "drawing",

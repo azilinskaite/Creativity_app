@@ -4,6 +4,7 @@ import disciplinesData from "@/data/disciplines.json";
 import { getSubmissions, Submission } from "@/utils/localStorage";
 import { calculateProgress } from "@/utils/localStorage";
 import ProgressBar from "./ProgressBar";
+import Image from "next/image";
 
 const numCols = 4;
 
@@ -21,43 +22,47 @@ export default function Disciplines() {
           d.challenges.length,
           submissions
         );
-        if (idx % numCols === 2) {
+
+        const coloredBox = (
+          <div
+            style={{ backgroundColor: d.color }}
+            className="flex items-center gap-4 p-6"
+          >
+            <div className="w-full">
+              <h2 className="text-lg capitalize mb-[3rem]">{d.discipline}</h2>
+              <ProgressBar percent={progressPercent} />
+            </div>
+          </div>
+        );
+
+        const spacerDiv = (
+          <div className="hidden h-full w-full md:block relative overflow-hidden">
+            {d.background && (
+              <Image
+                src={d.background}
+                alt={`${d.discipline} background`}
+                fill
+                style={{ objectFit: "cover" }}
+                sizes="(min-width: 768px) 100vw" 
+                priority={false}
+              />
+            )}
+            <div className="absolute inset-0 bg-[var(--beige)] opacity-30"></div>
+          </div>
+        );
+
+        if (idx % numCols === 2 || idx === 3) {
           return (
             <React.Fragment key={d.discipline}>
-              <div
-                style={{ backgroundColor: d.color }}
-                className="items-left justify-between p-6"
-              >
-                <h2 className="text-lg capitalize mb-[3rem]">{d.discipline}</h2>
-                <ProgressBar percent={progressPercent} />
-              </div>
-              <div className="hidden h-full w-full bg-[var(--beige)] md:block" />
-            </React.Fragment>
-          );
-        } else if (idx === 3) {
-          return (
-            <React.Fragment key={d.discipline}>
-              <div
-                style={{ backgroundColor: d.color }}
-                className="items-left justify-between p-6"
-              >
-                <h2 className="text-lg capitalize mb-[3rem]">{d.discipline}</h2>
-                <ProgressBar percent={progressPercent} />
-              </div>
-              <div className="hidden h-full w-full bg-[var(--beige)] md:block" />
+              {coloredBox}
+              {spacerDiv}
             </React.Fragment>
           );
         } else {
           return (
             <React.Fragment key={d.discipline}>
-              <div className="hidden h-full w-full bg-[var(--beige)] md:block" />
-              <div
-                style={{ backgroundColor: d.color }}
-                className="items-left justify-between p-6"
-              >
-                <h2 className="text-lg capitalize mb-[3rem]">{d.discipline}</h2>
-                <ProgressBar percent={progressPercent} />
-              </div>
+              {spacerDiv}
+              {coloredBox}
             </React.Fragment>
           );
         }
