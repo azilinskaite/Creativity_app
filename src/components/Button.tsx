@@ -5,6 +5,7 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: "primary" | "secondary";
   size?: "full" | "short";
   as?: React.ElementType;
+  className?: string;
 }
 
 export default function Button({
@@ -12,10 +13,10 @@ export default function Button({
   variant = "primary",
   size = "full",
   as: Component = "button",
+  className = "",
   ...props
 }: ButtonProps) {
-  const base =
-    "py-2 rounded-xl font-semibold transition focus:outline-none";
+  const base = "py-2 rounded-xl font-semibold transition focus:outline-none";
   const width = size === "full" ? "w-full" : "w-auto";
   const padding = size === "short" ? "px-[2rem]" : "";
   const variants = {
@@ -24,7 +25,10 @@ export default function Button({
       "bg-[var(--background)] text-[var(--foreground)] border hover:bg-white",
   };
   return (
-    <Component className={`${base} ${width} ${padding} ${variants[variant]}`} {...props}>
+    <Component
+      className={`${base} ${width} ${padding} ${variants[variant]} ${className}`}
+      {...props}
+    >
       {children}
     </Component>
   );
