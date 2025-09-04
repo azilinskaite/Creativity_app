@@ -3,7 +3,8 @@
 :root {
   --background: #EBF2F1;
   --foreground: #100F0F;
-  --beige: #F7F4EC;
+  /* --beige: #F7F4EC; */
+  --beige: #F0F0F0;
   --bright-red: #F40102;
   --fuschia: #F40201;
 }
