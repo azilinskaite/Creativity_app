@@ -1,11 +1,11 @@
 "use client";
 import { useState } from "react";
-import LoginBox from "@/components/LoginBox";
-import Modal from "@/components/Modal";
-import RegisterBox from "@/components/RegisterBox";
+// import LoginBox from "@/components/LoginBox";
+// import Modal from "@/components/Modal";
+// import RegisterBox from "@/components/RegisterBox";
+import Auth from "@/components/Auth";
 
 export default function Home() {
-  const [isSignupOpen, setSignupOpen] = useState(false);
   return (
     <div className="relative h-full flex items-center p-[2rem] md:p-[6rem]">
       <div
@@ -16,14 +16,8 @@ export default function Home() {
         <h1 className="py-4 max-w-lg text-6xl text-[var(--foreground)] text-center font-bold mr-6 md:text-left">
           Get on the wave of creativity
         </h1>
-        <LoginBox
-          onLogin={() => console.log("login")}
-          onSignup={() => setSignupOpen(true)}
-        />
+        <Auth/>
       </div>
-      <Modal isOpen={isSignupOpen} onClose={() => setSignupOpen(false)}>
-        <RegisterBox onRegister={() => console.log("register")} />
-      </Modal>
     </div>
   );
 }
