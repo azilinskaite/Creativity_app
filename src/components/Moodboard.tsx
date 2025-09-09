@@ -21,30 +21,17 @@ const MoodboardContext = createContext<MoodboardContextType | undefined>(
 
 export function MoodboardProvider({ children }: { children: ReactNode }) {
   const maxImages = 6;
-  // Initial state: empty array, to render placeholders during SSR
-  const [images, setImages] = useState<(string | null)[]>(
-    Array(maxImages).fill(null)
-  );
-  // Track mount status to load images only on client
-  const [hasMounted, setHasMounted] = useState(false);
-
-  useEffect(() => {
-    setHasMounted(true);
+  const [images, setImages] = useState<(string | null)[]>(() => {
     const stored = getMoodboardImages();
     if (stored && Array.isArray(stored)) {
-      const padded = [
-        ...stored,
-        ...Array(maxImages - stored.length).fill(null),
-      ];
-      setImages(padded);
+      return [...stored, ...Array(maxImages - stored.length).fill(null)];
     }
-  }, []);
+    return Array(maxImages).fill(null);
+  });
 
   useEffect(() => {
-    if (hasMounted) {
-      saveMoodboardImages(images);
-    }
-  }, [images, hasMounted]);
+    saveMoodboardImages(images);
+  }, [images]);
 
   return (
     <MoodboardContext.Provider value={{ images, setImages }}>
@@ -66,14 +53,16 @@ export default function Moodboard() {
   const { images, setImages } = useMoodboard();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const uploadIndex = useRef<number | null>(null);
-  // Track mount status so images render only after hydration
-  const [hasMounted, setHasMounted] = useState(false);
 
-  useEffect(() => {
-    setHasMounted(true);
-  }, []);
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   function onAddImageClick(index: number) {
+    if (index < 0 || index >= maxImages) return;
+    uploadIndex.current = index;
+    fileInputRef.current?.click();
+  }
+
+  function onEditImageClick(index: number) {
     if (index < 0 || index >= maxImages) return;
     uploadIndex.current = index;
     fileInputRef.current?.click();
@@ -82,7 +71,6 @@ export default function Moodboard() {
   function onImageUpload(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
     if (!file || uploadIndex.current === null) return;
-
     const currentIndex = uploadIndex.current;
     const reader = new FileReader();
 
@@ -115,21 +103,42 @@ export default function Moodboard() {
           <div
             key={i}
             className="relative aspect-[2/3] bg-[var(--beige)] rounded-xl overflow-hidden cursor-pointer flex items-center justify-center hover:bg-gray-100"
-            onClick={() => !imgSrc && onAddImageClick(i)}
+            onMouseEnter={() => setHoveredIndex(i)}
+            onMouseLeave={() => setHoveredIndex(null)}
+            onClick={() => {
+              uploadIndex.current = i;
+              fileInputRef.current?.click();
+            }}
           >
-            {hasMounted && imgSrc ? (
-              <Image
-                src={imgSrc}
-                alt={`Moodboard image ${i + 1}`}
-                fill
-                className="object-cover"
-                sizes="100vw"
-              />
+            {imgSrc ? (
+              <>
+                <Image
+                  src={imgSrc}
+                  alt={`Moodboard image ${i + 1}`}
+                  fill
+                  className="object-cover"
+                  sizes="100vw"
+                />
+                {hoveredIndex === i && (
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      uploadIndex.current = i;
+                      fileInputRef.current?.click();
+                    }}
+                    className="absolute top-2 right-2 z-10 rounded bg-black bg-opacity-50 text-white px-2 py-1 text-xs"
+                    aria-label={`Edit moodboard image ${i + 1}`}
+                  >
+                    Edit
+                  </button>
+                )}
+              </>
             ) : (
               <span className="text-gray-300 select-none">+ Add image</span>
             )}
           </div>
         ))}
+
         <input
           ref={fileInputRef}
           type="file"
