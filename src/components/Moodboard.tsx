@@ -1,78 +1,91 @@
 "use client";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, createContext, useContext, ReactNode } from "react";
 import Image from "next/image";
 import { getMoodboardImages, saveMoodboardImages } from "@/utils/localStorage";
 
-export default function Moodboard() {
+type MoodboardContextType = {
+  images: (string | null)[];
+  setImages: React.Dispatch<React.SetStateAction<(string | null)[]>>;
+};
+
+const MoodboardContext = createContext<MoodboardContextType | undefined>(undefined);
+
+export function MoodboardProvider({ children }: { children: ReactNode }) {
   const maxImages = 6;
-  const [images, setImages] = useState<(string | null)[]>(() =>
-    Array(maxImages).fill(null)
-  );
-  const fileInputRef = useRef<HTMLInputElement>(null);
-  const uploadIndex = useRef<number | null>(null);
+  const [images, setImages] = useState<(string | null)[]>(() => {
+    const stored = getMoodboardImages();
+    if (stored && Array.isArray(stored)) {
+      return [...stored, ...Array(maxImages - stored.length).fill(null)];
+    }
+    return Array(maxImages).fill(null);
+  });
 
   useEffect(() => {
-    const loadedImages = getMoodboardImages() || [];
-    console.log("Loaded images from localStorage:", loadedImages);
-    const paddedImages = [
-      ...loadedImages,
-      ...Array(maxImages - loadedImages.length).fill(null),
-    ];
-    setImages(paddedImages);
-  }, []);
-
-  useEffect(() => {
-    console.log("Saving images to localStorage:", images);
     saveMoodboardImages(images);
   }, [images]);
 
-function onAddImageClick(index: number) {
-  console.log("Clicked to upload image at index:", index);
-  if (index < 0 || index >= maxImages) {
-    console.error("Invalid image index clicked:", index);
-    return;
-  }
-  uploadIndex.current = index;
-  fileInputRef.current?.click();
+  return (
+    <MoodboardContext.Provider value={{ images, setImages }}>
+      {children}
+    </MoodboardContext.Provider>
+  );
 }
 
-function onImageUpload(e: React.ChangeEvent<HTMLInputElement>) {
-  const file = e.target.files?.[0];
-  if (!file || uploadIndex.current === null) {
-    console.log("No file or upload index is null");
-    return;
+export function useMoodboard() {
+  const context = useContext(MoodboardContext);
+  if (!context) {
+    throw new Error("useMoodboard must be used within a MoodboardProvider");
   }
+  return context;
+}
 
-  // Capture the current index in a local variable to avoid closure bugs
-  const currentIndex = uploadIndex.current;
+export default function Moodboard() {
+  const maxImages = 6;
+  const { images, setImages } = useMoodboard();
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const uploadIndex = useRef<number | null>(null);
 
-  const reader = new FileReader();
-
-  reader.onload = () => {
-    const result = reader.result;
-    if (typeof result === "string") {
-      setImages((prev) => {
-        const updated = [...prev];
-        updated[currentIndex] = result;  // Use the local captured index here
-        console.log("Updated images array:", updated);
-        return updated;
-      });
-    } else {
-      console.warn("FileReader result not string:", result);
+  function onAddImageClick(index: number) {
+    if (index < 0 || index >= maxImages) {
+      console.error("Invalid image index clicked:", index);
+      return;
     }
-    uploadIndex.current = null;
-    e.target.value = "";
-  };
+    uploadIndex.current = index;
+    fileInputRef.current?.click();
+  }
 
-  reader.onerror = (error) => {
-    console.error("FileReader error:", error);
-    uploadIndex.current = null;
-    e.target.value = "";
-  };
+  function onImageUpload(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    if (!file || uploadIndex.current === null) {
+      console.log("No file or upload index is null");
+      return;
+    }
+    const currentIndex = uploadIndex.current;
+    const reader = new FileReader();
 
-  reader.readAsDataURL(file);
-}
+    reader.onload = () => {
+      const result = reader.result;
+      if (typeof result === "string") {
+        setImages((prev) => {
+          const updated = [...prev];
+          updated[currentIndex] = result;
+          return updated;
+        });
+      } else {
+        console.warn("FileReader result not string:", result);
+      }
+      uploadIndex.current = null;
+      e.target.value = "";
+    };
 
+    reader.onerror = (error) => {
+      console.error("FileReader error:", error);
+      uploadIndex.current = null;
+      e.target.value = "";
+    };
+
+    reader.readAsDataURL(file);
+  }
 
   return (
     <section className="p-4 bg-white md:px-[2rem] md:pb-[2rem]">

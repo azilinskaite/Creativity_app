@@ -42,12 +42,16 @@ export function saveMoodboardImages(images: (string | null)[]) {
   localStorage.setItem("moodboardImages", JSON.stringify(images));
 }
 
-export function getMoodboardImages(): (string | null)[] {
-  if (typeof window === "undefined") return Array(6).fill(null);
-  const stored = localStorage.getItem("moodboardImages");
-  if (!stored) return Array(6).fill(null);
-  return JSON.parse(stored);
+export function getMoodboardImages() {
+  try {
+    const item = localStorage.getItem("moodboardImages");
+    return item ? JSON.parse(item) : null;
+  } catch (error) {
+    console.error("Failed to load moodboardImages from localStorage:", error);
+    return null;
+  }
 }
+
 
 // type Achievement = {
 //   id: string;
