@@ -51,22 +51,23 @@ export function useMoodboard() {
 export default function Moodboard() {
   const maxImages = 6;
   const { images, setImages } = useMoodboard();
+  const [hasMounted, setHasMounted] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const uploadIndex = useRef<number | null>(null);
-
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
-  function onAddImageClick(index: number) {
-    if (index < 0 || index >= maxImages) return;
-    uploadIndex.current = index;
-    fileInputRef.current?.click();
-  }
+   useEffect(() => {
+    setHasMounted(true);
+    const loadedImages = getMoodboardImages() || [];
+    const paddedImages = [...loadedImages, ...Array(maxImages - loadedImages.length).fill(null)];
+    setImages(paddedImages);
+  }, []);
 
-  function onEditImageClick(index: number) {
-    if (index < 0 || index >= maxImages) return;
-    uploadIndex.current = index;
-    fileInputRef.current?.click();
-  }
+  useEffect(() => {
+    if (hasMounted) {
+      saveMoodboardImages(images);
+    }
+  }, [images, hasMounted]);
 
   function onImageUpload(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
@@ -110,7 +111,7 @@ export default function Moodboard() {
               fileInputRef.current?.click();
             }}
           >
-            {imgSrc ? (
+            {hasMounted && imgSrc ? (
               <>
                 <Image
                   src={imgSrc}
