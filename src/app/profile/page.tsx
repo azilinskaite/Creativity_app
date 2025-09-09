@@ -1,6 +1,6 @@
 import React from "react";
 import SectionHeader from "@/components/SectionHeader";
-import Moodboard from "@/components/Moodboard/Moodboard";
+import Moodboard from "@/components/Moodboard";
 import Achievements from "@/components/Achievements";
 import Gallery from "@/components/Gallery";
 

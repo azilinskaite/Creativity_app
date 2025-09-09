@@ -13,7 +13,7 @@
     },
     {
       "discipline": "drawing",
-      "color": "#8956BB",
+      "color": "#9C60D7",
       "challenges": [
         { "id": "drawing-1", "text": "Sketch a still life of your living room." },
         { "id": "drawing-2", "text": "Capture a feeling of a live flower. It doesn't have to be realistic." },

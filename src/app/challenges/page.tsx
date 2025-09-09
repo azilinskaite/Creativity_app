@@ -12,7 +12,7 @@ export default function ProfilePage() {
       </div>
       <SectionHeader>Current challenge</SectionHeader>
       <CurrentChallenge />
-      <SectionHeader>Disciplines</SectionHeader>
+      <SectionHeader>Your journey</SectionHeader>
       <Disciplines />
     </div>
   );
