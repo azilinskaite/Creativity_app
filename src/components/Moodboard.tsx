@@ -1,5 +1,12 @@
 "use client";
-import React, { useState, useEffect, useRef, createContext, useContext, ReactNode } from "react";
+import React, {
+  useState,
+  useEffect,
+  useRef,
+  createContext,
+  useContext,
+  ReactNode,
+} from "react";
 import Image from "next/image";
 import { getMoodboardImages, saveMoodboardImages } from "@/utils/localStorage";
 
@@ -8,21 +15,36 @@ type MoodboardContextType = {
   setImages: React.Dispatch<React.SetStateAction<(string | null)[]>>;
 };
 
-const MoodboardContext = createContext<MoodboardContextType | undefined>(undefined);
+const MoodboardContext = createContext<MoodboardContextType | undefined>(
+  undefined
+);
 
 export function MoodboardProvider({ children }: { children: ReactNode }) {
   const maxImages = 6;
-  const [images, setImages] = useState<(string | null)[]>(() => {
-    const stored = getMoodboardImages();
-    if (stored && Array.isArray(stored)) {
-      return [...stored, ...Array(maxImages - stored.length).fill(null)];
-    }
-    return Array(maxImages).fill(null);
-  });
+  // Initial state: empty array, to render placeholders during SSR
+  const [images, setImages] = useState<(string | null)[]>(
+    Array(maxImages).fill(null)
+  );
+  // Track mount status to load images only on client
+  const [hasMounted, setHasMounted] = useState(false);
 
   useEffect(() => {
-    saveMoodboardImages(images);
-  }, [images]);
+    setHasMounted(true);
+    const stored = getMoodboardImages();
+    if (stored && Array.isArray(stored)) {
+      const padded = [
+        ...stored,
+        ...Array(maxImages - stored.length).fill(null),
+      ];
+      setImages(padded);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (hasMounted) {
+      saveMoodboardImages(images);
+    }
+  }, [images, hasMounted]);
 
   return (
     <MoodboardContext.Provider value={{ images, setImages }}>
@@ -44,22 +66,23 @@ export default function Moodboard() {
   const { images, setImages } = useMoodboard();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const uploadIndex = useRef<number | null>(null);
+  // Track mount status so images render only after hydration
+  const [hasMounted, setHasMounted] = useState(false);
+
+  useEffect(() => {
+    setHasMounted(true);
+  }, []);
 
   function onAddImageClick(index: number) {
-    if (index < 0 || index >= maxImages) {
-      console.error("Invalid image index clicked:", index);
-      return;
-    }
+    if (index < 0 || index >= maxImages) return;
     uploadIndex.current = index;
     fileInputRef.current?.click();
   }
 
   function onImageUpload(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
-    if (!file || uploadIndex.current === null) {
-      console.log("No file or upload index is null");
-      return;
-    }
+    if (!file || uploadIndex.current === null) return;
+
     const currentIndex = uploadIndex.current;
     const reader = new FileReader();
 
@@ -71,15 +94,12 @@ export default function Moodboard() {
           updated[currentIndex] = result;
           return updated;
         });
-      } else {
-        console.warn("FileReader result not string:", result);
       }
       uploadIndex.current = null;
       e.target.value = "";
     };
 
-    reader.onerror = (error) => {
-      console.error("FileReader error:", error);
+    reader.onerror = () => {
       uploadIndex.current = null;
       e.target.value = "";
     };
@@ -97,7 +117,7 @@ export default function Moodboard() {
             className="relative aspect-[2/3] bg-[var(--beige)] rounded-xl overflow-hidden cursor-pointer flex items-center justify-center hover:bg-gray-100"
             onClick={() => !imgSrc && onAddImageClick(i)}
           >
-            {imgSrc ? (
+            {hasMounted && imgSrc ? (
               <Image
                 src={imgSrc}
                 alt={`Moodboard image ${i + 1}`}
