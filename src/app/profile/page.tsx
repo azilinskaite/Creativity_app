@@ -4,6 +4,7 @@ import Moodboard from "@/components/Moodboard";
 import Achievements from "@/components/Achievements";
 import Gallery from "@/components/Gallery";
 import { MoodboardProvider } from "@/components/Moodboard";
+import Footer from "@/components/Footer";
 
 export default function ProfilePage() {
   return (
@@ -16,6 +17,7 @@ export default function ProfilePage() {
         <SectionHeader>Gallery</SectionHeader>
         <Gallery />
       </MoodboardProvider>
+      <Footer />
     </div>
   );
 }
