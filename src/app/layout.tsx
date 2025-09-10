@@ -13,8 +13,8 @@ const calSans = Cal_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "App Title",
-  description: "App Description",
+  title: "Ripple",
+  description: "Creativity app",
 };
 
 export default function RootLayout({
