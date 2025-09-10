@@ -30,10 +30,10 @@ export default function Achievements() {
         return (
           <div
             key={d.discipline}
-            className="items-left justify-between p-6"
+            className="flex flex-col items-left justify-between px-[2rem] py-[1rem] gap-[1rem]"
             style={{ backgroundColor: d.color }}
           >
-            <h2 className="capitalize mb-2">{d.discipline}</h2>
+            <h2 className="capitalize text-xl mb-[0.5rem]">{d.discipline}</h2>
             <ProgressBar percent={progressPercent} colorFill="black" />
           </div>
         );

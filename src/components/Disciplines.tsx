@@ -14,6 +14,59 @@ export default function Disciplines() {
     setSubmissions(getSubmissions());
   }, []);
 
+  function ColoredBox({
+    d,
+    progressPercent,
+  }: {
+    d: (typeof disciplinesData.disciplines)[0];
+    progressPercent: number;
+  }) {
+    const [showDescription, setShowDescription] = useState(false);
+    const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+      const handleResize = () => setIsMobile(window.innerWidth < 768);
+      handleResize();
+      window.addEventListener("resize", handleResize);
+      return () => window.removeEventListener("resize", handleResize);
+    }, []);
+
+    useEffect(() => {
+      if (showDescription) {
+        const timeout = setTimeout(() => setShowDescription(false), 5000);
+        return () => clearTimeout(timeout);
+      }
+    }, [showDescription]);
+
+    const toggleDescription = () => {
+      if (isMobile) setShowDescription((prev) => !prev);
+    };
+
+    return (
+      <div
+        style={{ backgroundColor: d.color }}
+        className="items-center p-[1.2rem] group"
+        onClick={toggleDescription}
+      >
+        <div className="w-full h-full flex flex-col justify-between">
+          <h2 className="text-xl capitalize mb-[0.4rem]">{d.discipline}</h2>
+          <p
+            className={`text-xs mb-[0.4rem] transition-opacity duration-500 ${
+              isMobile
+                ? showDescription
+                  ? "opacity-100"
+                  : "opacity-0"
+                : "opacity-0 group-hover:opacity-100"
+            }`}
+          >
+            {d.description}
+          </p>
+          <ProgressBar percent={progressPercent} />
+        </div>
+      </div>
+    );
+  }
+
   return (
     <section className="bg-white grid grid-cols-2 md:grid-cols-4 md:gap-0 md:p-0">
       {disciplinesData.disciplines.map((d, idx) => {
@@ -23,27 +76,18 @@ export default function Disciplines() {
           submissions
         );
 
-        const coloredBox = (
-          <div
-            style={{ backgroundColor: d.color }}
-            className="flex items-center gap-4 p-6"
-          >
-            <div className="w-full">
-              <h2 className="text-lg capitalize mb-[3rem]">{d.discipline}</h2>
-              <ProgressBar percent={progressPercent} />
-            </div>
-          </div>
-        );
-
         const spacerDiv = (
-          <div className="hidden h-full w-full md:block relative overflow-hidden">
+          <div
+            className="hidden h-full w-full md:block relative overflow-hidden"
+            key={`spacer-${d.discipline}`}
+          >
             {d.background && (
               <Image
                 src={d.background}
                 alt={`${d.discipline} background`}
                 fill
                 style={{ objectFit: "cover" }}
-                sizes="(min-width: 768px) 100vw" 
+                sizes="(min-width: 768px) 100vw"
                 priority={false}
               />
             )}
@@ -54,7 +98,7 @@ export default function Disciplines() {
         if (idx % numCols === 2 || idx === 3) {
           return (
             <React.Fragment key={d.discipline}>
-              {coloredBox}
+              <ColoredBox d={d} progressPercent={progressPercent} />
               {spacerDiv}
             </React.Fragment>
           );
@@ -62,7 +106,7 @@ export default function Disciplines() {
           return (
             <React.Fragment key={d.discipline}>
               {spacerDiv}
-              {coloredBox}
+              <ColoredBox d={d} progressPercent={progressPercent} />
             </React.Fragment>
           );
         }
