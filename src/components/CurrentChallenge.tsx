@@ -17,7 +17,6 @@ export default function CurrentChallenge() {
   const selectedChallengeIndex = pendingChallenge?.challengeIndex ?? -1;
 
   const [challengeVisible, setChallengeVisible] = useState(false);
-
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSubmitModalOpen, setSubmitModalOpen] = useState(false);
 
@@ -47,14 +46,17 @@ export default function CurrentChallenge() {
     }
   }, [selectedDisciplineIndex, selectedChallengeIndex, discipline, challenge]);
 
-  function handleImageFileChange(e: React.ChangeEvent<HTMLInputElement>) {
-    const file = e.target.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = () => setUploadedImage(reader.result as string);
-      reader.readAsDataURL(file);
-    }
+function handleImageFileChange(e: React.ChangeEvent<HTMLInputElement>) {
+  const file = e.target.files?.[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = () => {
+      const imgData = reader.result as string;
+      setUploadedImage(imgData);
+    };
+    reader.readAsDataURL(file);
   }
+}
 
   const handleGetChallenge = () => {
     setIsModalOpen(true);
@@ -80,21 +82,23 @@ export default function CurrentChallenge() {
     setIsModalOpen(false);
   };
 
-  function handleSaveSubmission() {
-    if (!uploadedImage || !discipline || !challenge) return;
-    saveSubmission({
-      discipline: discipline.discipline,
-      challengeId: challenge.id,
-      challengeText: challenge.text,
-      imageData: uploadedImage,
-      comment: comment.trim(),
-    });
-    toast.success("Submission saved!");
-    setSubmitModalOpen(false);
-    setUploadedImage(null);
-    setComment("");
-    clearPending();
-  }
+function handleSaveSubmission() {
+  if (!uploadedImage || !discipline || !challenge) return;
+
+  saveSubmission({
+    discipline: discipline.discipline,
+    challengeId: challenge.id,
+    challengeText: challenge.text,
+    imageData: uploadedImage,
+    comment: comment.trim(),
+  });
+  toast.success("Submission saved!");
+  setSubmitModalOpen(false);
+  setUploadedImage(null);
+  setComment("");
+  clearPending();
+}
+
 
   return (
     <>
