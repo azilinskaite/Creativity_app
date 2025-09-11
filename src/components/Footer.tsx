@@ -5,7 +5,7 @@ export default function Footer() {
   return (
     <footer className="p-[2rem] bg-[var(--foreground)] flex justify-end">
       <Image
-        src="/Ripple_logo_red.png"
+        src="/Ripple_logo_large.png"
         alt="Red Logo"
         width={555}
         height={437}
