@@ -46,17 +46,17 @@ export default function CurrentChallenge() {
     }
   }, [selectedDisciplineIndex, selectedChallengeIndex, discipline, challenge]);
 
-function handleImageFileChange(e: React.ChangeEvent<HTMLInputElement>) {
-  const file = e.target.files?.[0];
-  if (file) {
-    const reader = new FileReader();
-    reader.onload = () => {
-      const imgData = reader.result as string;
-      setUploadedImage(imgData);
-    };
-    reader.readAsDataURL(file);
+  function handleImageFileChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        const imgData = reader.result as string;
+        setUploadedImage(imgData);
+      };
+      reader.readAsDataURL(file);
+    }
   }
-}
 
   const handleGetChallenge = () => {
     setIsModalOpen(true);
@@ -82,32 +82,26 @@ function handleImageFileChange(e: React.ChangeEvent<HTMLInputElement>) {
     setIsModalOpen(false);
   };
 
-function handleSaveSubmission() {
-  if (!uploadedImage || !discipline || !challenge) return;
+  function handleSaveSubmission() {
+    if (!uploadedImage || !discipline || !challenge) return;
 
-  saveSubmission({
-    discipline: discipline.discipline,
-    challengeId: challenge.id,
-    challengeText: challenge.text,
-    imageData: uploadedImage,
-    comment: comment.trim(),
-  });
-  toast.success("Submission saved!");
-  setSubmitModalOpen(false);
-  setUploadedImage(null);
-  setComment("");
-  clearPending();
-}
-
+    saveSubmission({
+      discipline: discipline.discipline,
+      challengeId: challenge.id,
+      challengeText: challenge.text,
+      imageData: uploadedImage,
+      comment: comment.trim(),
+    });
+    toast.success("Submission saved!");
+    setSubmitModalOpen(false);
+    setUploadedImage(null);
+    setComment("");
+    clearPending();
+  }
 
   return (
     <>
       <section className="bg-white grid grid-cols-1 md:grid-cols-2">
-        <ChallengeSubmitBox
-          onSubmitChallenge={handleOpenSubmitModal}
-          onGetChallenge={handleGetChallenge}
-          background={discipline?.background ?? "var(--beige)"}
-        />
         <div className="p-[1rem] mb-[1rem] md:p-[2rem]">
           <h5 className="mb-[1rem]" style={{ textTransform: "capitalize" }}>
             Part of: {discipline?.discipline ?? "No discipline selected"}
@@ -124,6 +118,11 @@ function handleSaveSubmission() {
             />
           )}
         </div>
+        <ChallengeSubmitBox
+          onSubmitChallenge={handleOpenSubmitModal}
+          onGetChallenge={handleGetChallenge}
+          background={discipline?.background ?? "var(--beige)"}
+        />
 
         <Modal isOpen={isSubmitModalOpen} onClose={handleCloseSubmitModal}>
           <div className="flex flex-col items-center gap-4">

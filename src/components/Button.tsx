@@ -23,6 +23,7 @@ export default function Button({
     primary: "bg-[var(--foreground)] text-white hover:bg-[var(--bright-red)]",
     secondary:
       "bg-[var(--background)] text-[var(--foreground)] border hover:bg-white",
+      red: "bg-[var(--bright-red)] text-white hover:bg-[var(--foreground)]",
   };
   return (
     <Component

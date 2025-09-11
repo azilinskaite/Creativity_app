@@ -22,7 +22,7 @@ export default function ChallengeSubmitBox({
       }}
     >
       <Button variant="primary" onClick={onGetChallenge}>
-        Start a challenge
+        Get a challenge
       </Button>
       <Button variant="primary" onClick={onSubmitChallenge}>
         Submit challenge

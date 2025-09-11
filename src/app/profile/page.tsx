@@ -10,7 +10,7 @@ export default function ProfilePage() {
   return (
     <div>
       <MoodboardProvider>
-        <SectionHeader bg="bg-[var(--fuschia)]">Hi user!</SectionHeader>
+        <SectionHeader bg="bg-[var(--bright-red)]">Hi user!</SectionHeader>
         <Moodboard />
         <SectionHeader>Achievements</SectionHeader>
         <Achievements />

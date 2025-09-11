@@ -7,7 +7,7 @@ import Footer from "@/components/Footer";
 export default function ProfilePage() {
   return (
     <div>
-      <SectionHeader bg="bg-[var(--fuschia)]">Hi user!</SectionHeader>
+      <SectionHeader bg="bg-[var(--bright-red)]">Hi user!</SectionHeader>
       <div className="p-[1rem] bg-white md:p-[2rem]">
         <p className="max-w-[74ch]">
           Here, you&apos;ll find challenges designed to spark your creativity
