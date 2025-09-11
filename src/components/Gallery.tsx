@@ -1,17 +1,32 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
+import Button from "./Button";
 import disciplinesData from "@/data/disciplines.json";
-import { Submission, getSubmissions } from "@/utils/localStorage";
+import {
+  Submission,
+  getSubmissions,
+  updateSubmission,
+  deleteSubmission,
+} from "@/utils/localStorage";
 
 export default function Gallery() {
   const [submissions, setSubmissions] = useState<Submission[]>([]);
   const [selected, setSelected] = useState<Submission | null>(null);
+  const [isEditing, setIsEditing] = useState(false);
+  const [editedComment, setEditedComment] = useState("");
   const slotsCount = Math.max(1, submissions.length);
 
   useEffect(() => {
     setSubmissions(getSubmissions());
   }, []);
+
+  useEffect(() => {
+    if (selected) {
+      setEditedComment(selected.comment || "");
+      setIsEditing(false);
+    }
+  }, [selected]);
 
   function getChallengeText(discipline: string, challengeId: string) {
     const disciplineObj = disciplinesData.disciplines.find(
@@ -92,11 +107,79 @@ export default function Gallery() {
               Challenge: <br />
               {getChallengeText(selected.discipline, selected.challengeId)}
             </p>
-            {selected.comment && (
-              <p className="italic text-[var(--foreground)] justify-end">
-                {selected.comment}
-              </p>
+
+            {isEditing ? (
+              <div className="flex flex-col gap-2">
+                <textarea
+                  className="border rounded p-2 text-sm w-full"
+                  value={editedComment}
+                  onChange={(e) => setEditedComment(e.target.value)}
+                  rows={4}
+                  placeholder="Edit comment..."
+                />
+                <div className="flex gap-2">
+                  <Button
+        size="short"
+        variant="primary"
+        className="text-xs p-[0.5rem]"
+        onClick={() => {
+          if (selected) {
+            const updatedSub = {
+              ...selected,
+              comment: editedComment,
+            };
+            const updated = updateSubmission(updatedSub);
+            setSubmissions(updated);
+            setSelected(updatedSub);
+          }
+          setIsEditing(false);
+        }}
+      >
+        Save
+      </Button>
+      <Button
+        size="short"
+        variant="primary"
+        className="text-xs p-[0.5rem]"
+        onClick={() => setIsEditing(false)}
+      >
+        Cancel
+      </Button>
+                </div>
+              </div>
+            ) : (
+              selected.comment && (
+                <p className="italic text-[var(--foreground)] justify-end">
+                  {selected.comment}
+                </p>
+              )
             )}
+            <div className="flex gap-[0.5rem] mt-[4rem]">
+            <Button
+              variant="secondary" 
+              size="short"
+              onClick={() => {
+                if (selected) {
+                  const updated = deleteSubmission(selected.challengeId);
+                  setSubmissions(updated);
+                  setSelected(null);
+                }
+              }}
+            >
+              Delete
+            </Button>
+
+            <Button
+              variant="secondary"
+              size="short"
+              onClick={() => {
+                setIsEditing(true);
+                setEditedComment(selected?.comment || "");
+              }}
+            >
+              Edit
+            </Button>
+          </div>
           </div>
         </div>
       )}

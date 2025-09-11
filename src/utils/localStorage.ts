@@ -52,6 +52,21 @@ export function getMoodboardImages() {
   }
 }
 
+export function deleteSubmission(id: string) {
+  const subs = getSubmissions();
+  const filtered = subs.filter((s) => s.challengeId !== id);
+  localStorage.setItem("submissions", JSON.stringify(filtered));
+  return filtered;
+}
+
+export function updateSubmission(updated: Submission) {
+  const subs = getSubmissions();
+  const newList = subs.map((s) => (s.challengeId === updated.challengeId ? updated : s));
+  localStorage.setItem("submissions", JSON.stringify(newList));
+  return newList;
+}
+
+
 
 // type Achievement = {
 //   id: string;
