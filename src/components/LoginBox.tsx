@@ -37,7 +37,7 @@ export default function LoginBox({
         required
       />
       {error && (
-        <p className="text-xs text-center text-[var(--fuschia)] pb-[0.5rem]">
+        <p className="text-xs text-center text-[var(--bright-red)] pb-[0.5rem]">
           {error}
         </p>
       )}

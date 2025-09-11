@@ -17,6 +17,7 @@ export default function RegisterBox({
   loading,
   error,
   registerSuccessMessage,
+  onGoBack,
 }: {
   username: string;
   setUsername: React.Dispatch<React.SetStateAction<string>>;
@@ -30,6 +31,7 @@ export default function RegisterBox({
   loading: boolean;
   error?: string;
   registerSuccessMessage: string;
+  onGoBack: () => void;
 }) {
   const passwordsMatch = password === confirmPassword;
 
@@ -51,11 +53,23 @@ export default function RegisterBox({
   return (
     <form
       onSubmit={handleSubmit}
-      className="bg-white bg-opacity-80 p-8 border-2 rounded-2xl min-w-sm max-w-sm"
+      className="bg-white p-[2rem] border-2 rounded-2xl min-w-sm max-w-sm"
       noValidate
     >
-      <legend className="sr-only">Sign Up</legend>
-      <h2 className="text-2xl font-bold mb-4">Sign Up</h2>
+      <div className="flex justify-between items-center mb-[1rem]">
+        <h2 className="text-2xl font-bold">Sign Up</h2>
+        <Button
+          size="short"
+          variant="secondary"
+          className="text-s p-[0rem]"
+          onClick={(e) => {
+            e.preventDefault();
+            onGoBack();
+          }}
+        >
+          Go Back
+        </Button>
+      </div>
 
       <input
         type="text"

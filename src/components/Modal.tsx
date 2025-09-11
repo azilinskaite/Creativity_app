@@ -14,7 +14,7 @@ export default function Modal({ isOpen, onClose, children }: ModalProps) {
       <div className="absolute inset-0" onClick={onClose}></div>
       <div className="relative bg-white border rounded-2xl p-6 max-w-md w-full z-10">
         <button
-          className="absolute top-7 right-7 text-[var(--foreground)] hover:text-[var(--bright-red)]"
+          className="absolute top-[1.4rem] right-[2rem] text-[var(--foreground)] text-xl hover:text-[var(--bright-red)]"
           onClick={onClose}
         >
           ✕

@@ -2,7 +2,7 @@ import React from "react";
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
-  variant?: "primary" | "secondary";
+  variant?: "primary" | "secondary" | "red";
   size?: "full" | "short";
   as?: React.ElementType;
   className?: string;
@@ -16,7 +16,7 @@ export default function Button({
   className = "",
   ...props
 }: ButtonProps) {
-  const base = "py-2 rounded-xl font-semibold transition focus:outline-none";
+  const base = "py-2 rounded-xl font-semibold transition focus:outline-none"
   const width = size === "full" ? "w-full" : "w-auto";
   const padding = size === "short" ? "px-[2rem]" : "";
   const variants = {

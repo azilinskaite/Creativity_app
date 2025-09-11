@@ -68,8 +68,8 @@ export default function Gallery() {
                   )}
                 </>
               ) : (
-                <div className="text-gray-300 bg-[var(--beige)] flex items-center py-[6rem] justify-center h-full">
-                  No image
+                <div className="text-gray-400 bg-[var(--beige)] flex items-center py-[6rem] px-[1rem] text-center justify-center h-full">
+                  No submitted images yet
                 </div>
               )}
             </div>

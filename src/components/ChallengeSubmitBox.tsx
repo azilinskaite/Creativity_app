@@ -5,12 +5,14 @@ type ChallengeSubmitBoxProps = {
   onGetChallenge: () => void;
   onSubmitChallenge: () => void;
   background: string;
+  hasPendingChallenge: boolean;
 };
 
 export default function ChallengeSubmitBox({
   onGetChallenge,
   onSubmitChallenge,
   background,
+  hasPendingChallenge,
 }: ChallengeSubmitBoxProps) {
   return (
     <div
@@ -21,7 +23,7 @@ export default function ChallengeSubmitBox({
         backgroundPosition: "center",
       }}
     >
-      <Button variant="primary" onClick={onGetChallenge}>
+      <Button variant={hasPendingChallenge ? "primary" : "red"} onClick={onGetChallenge}>
         Get a new challenge
       </Button>
       <Button variant="primary" onClick={onSubmitChallenge}>

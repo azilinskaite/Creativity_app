@@ -98,7 +98,7 @@ export default function Moodboard() {
 
   return (
     <section className="p-4 bg-white md:px-[2rem] md:pb-[2rem]">
-      <h5 className="mb-4">Current inspirations</h5>
+      <h5 className="mb-4">Moodboard of current inspirations</h5>
       <div className="grid grid-cols-3 gap-2 md:grid-cols-6">
         {images.map((imgSrc, i) => (
           <div
@@ -135,7 +135,7 @@ export default function Moodboard() {
                 )}
               </>
             ) : (
-              <span className="text-gray-300 select-none">+ Add image</span>
+              <span className="text-gray-400 select-none p-[1rem] text-center">+ Add moodboard image</span>
             )}
           </div>
         ))}

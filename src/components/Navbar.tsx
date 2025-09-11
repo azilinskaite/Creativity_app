@@ -18,7 +18,7 @@ export default function Navbar() {
             alt="Site Logo"
             width={223}
             height={176}
-            style={{ width: "auto", height: "46px", objectFit: "contain" }}
+            style={{ width: "auto", height: "3rem", objectFit: "contain" }}
           />
         </Link>
         <div className="md:hidden flex items-center justify-center h-[33px] w-[33px]">

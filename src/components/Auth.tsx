@@ -122,6 +122,10 @@ export default function Auth() {
           loading={loading}
           error={error}
           registerSuccessMessage={registerSuccessMessage}
+          onGoBack={() => {
+            setError("");
+            setIsRegistering(false);
+          }}
         />
       ) : (
         <LoginBox

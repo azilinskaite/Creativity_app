@@ -104,7 +104,7 @@ export default function CurrentChallenge() {
       <section className="bg-white grid grid-cols-1 md:grid-cols-2">
         <div className="p-[1rem] mb-[1rem] md:p-[2rem]">
           <h5 className="mb-[1rem]" style={{ textTransform: "capitalize" }}>
-            Part of: {discipline?.discipline ?? "No discipline selected"}
+            Part of: {discipline?.discipline ?? "not selected"}
           </h5>
           {challengeVisible && challenge ? (
             <ChallengeBox
@@ -119,24 +119,34 @@ export default function CurrentChallenge() {
           )}
         </div>
         <ChallengeSubmitBox
-          onSubmitChallenge={handleOpenSubmitModal}
           onGetChallenge={handleGetChallenge}
+          onSubmitChallenge={handleOpenSubmitModal}
           background={discipline?.background ?? "var(--beige)"}
+          hasPendingChallenge={pendingChallenge !== null}
         />
 
         <Modal isOpen={isSubmitModalOpen} onClose={handleCloseSubmitModal}>
-          <div className="flex flex-col items-center gap-4">
+          <div className="flex flex-col items-center gap-[1rem]">
+            <h2>Submit challenge by uploading a photo</h2>
             <input
               type="file"
               accept="image/*"
+              id="upload-photo"
               onChange={handleImageFileChange}
-              className="border p-2 rounded-md"
+              className="hidden"
             />
+
+            <label
+              htmlFor="upload-photo"
+              className="cursor-pointer bg-(--beige) hover:bg-(--bright-red) px-4 py-2 rounded-lg"
+            >
+              Upload a photo
+            </label>
             <textarea
               value={comment}
               onChange={(e) => setComment(e.target.value)}
               placeholder="Thoughts about the challenge"
-              className="border p-2 rounded-md w-full max-w-sm"
+              className="border p-[0.5rem] mx-[1rem] rounded-md w-full max-w-sm"
               rows={3}
             />
             {uploadedImage && (

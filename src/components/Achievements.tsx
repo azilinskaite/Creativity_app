@@ -1,5 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
+import Link from "next/link";
 import { getSubmissions, Submission } from "@/utils/localStorage";
 import disciplinesData from "@/data/disciplines.json";
 import ProgressBar from "./ProgressBar";
@@ -18,6 +19,17 @@ export default function Achievements() {
   const startedDisciplines = disciplinesData.disciplines.filter((discipline) =>
     submissions.some((sub) => sub.discipline === discipline.discipline)
   );
+
+    if (startedDisciplines.length === 0) {
+    return (
+      <section className=" bg-white flex items-center justify-center h-[12rem] text-center p-4 rounded-md">
+        <p className="text-gray-400 text-lg">
+          No achievements yet, go get your first 
+         <Link href="/challenges" className="text-[var(--bright-red)]"> challenge</Link>
+        </p>
+      </section>
+    );
+  }
 
   return (
     <section className="bg-white grid grid-cols-2 md:grid-cols-4 md:gap-0 md:p-0">
