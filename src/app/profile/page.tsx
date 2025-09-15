@@ -7,6 +7,7 @@ import Gallery from "@/components/Gallery";
 import { MoodboardProvider } from "@/components/Moodboard";
 import Footer from "@/components/Footer";
 import { useUser } from "@/hooks/useUser";
+import { RevealOnScroll } from "@/components/RevealOnScroll";
 
 export default function ProfilePage() {
   const user = useUser();
@@ -20,7 +21,9 @@ export default function ProfilePage() {
         <SectionHeader>Achievements</SectionHeader>
         <Achievements />
         <SectionHeader>Gallery</SectionHeader>
-        <Gallery />
+        <RevealOnScroll>
+          <Gallery />
+        </RevealOnScroll>
       </MoodboardProvider>
       <Footer />
     </div>

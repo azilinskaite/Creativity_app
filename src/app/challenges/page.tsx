@@ -5,6 +5,7 @@ import CurrentChallenge from "@/components/CurrentChallenge";
 import Disciplines from "@/components/Disciplines";
 import Footer from "@/components/Footer";
 import { useUser } from "@/hooks/useUser";
+import { RevealOnScroll } from "@/components/RevealOnScroll";
 
 export default function ProfilePage() {
   const user = useUser();
@@ -24,8 +25,10 @@ export default function ProfilePage() {
       </div>
       <SectionHeader>Current challenge</SectionHeader>
       <CurrentChallenge />
-      <SectionHeader>Your journey</SectionHeader>
-      <Disciplines />
+      <RevealOnScroll>
+        <SectionHeader>Your journey</SectionHeader>
+        <Disciplines />
+      </RevealOnScroll>
       <Footer />
     </div>
   );

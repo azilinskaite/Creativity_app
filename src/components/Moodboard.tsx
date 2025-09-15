@@ -61,7 +61,7 @@ export default function Moodboard() {
     const loadedImages = getMoodboardImages() || [];
     const paddedImages = [...loadedImages, ...Array(maxImages - loadedImages.length).fill(null)];
     setImages(paddedImages);
-  }, []);
+  }, [setImages]);
 
   useEffect(() => {
     if (hasMounted) {
