@@ -6,7 +6,7 @@ export default function Home() {
     <div className="relative h-full flex items-center p-[2rem] md:p-[6rem]">
       <div
         className="absolute inset-0 w-full h-full bg-center bg-cover opacity-95"
-        style={{ backgroundImage: "url('/background.jpg')" }}
+        style={{ backgroundImage: "url('/background.webp')" }}
       ></div>
       <div className="z-10 w-full flex items-center flex-col justify-between md:flex-row">
         <div>
