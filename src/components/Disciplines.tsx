@@ -61,7 +61,8 @@ export default function Disciplines() {
           >
             {d.description}
           </p>
-          <ProgressBar percent={progressPercent} />
+           <ProgressBar percent={progressPercent} hidden={progressPercent === 0} />
+
         </div>
       </div>
     );

@@ -6,6 +6,7 @@ interface ProgressBarProps {
   size?: "small" | "normal" | "large";
   colorFill?: string;
   className?: string;
+  hidden?: boolean;
 }
 
 export default function ProgressBar({
@@ -13,21 +14,22 @@ export default function ProgressBar({
   size = "normal",
   colorFill = "black",
   className = "",
+  hidden = false,
 }: ProgressBarProps) {
   const heightClass =
     size === "small" ? "h-3" : size === "large" ? "h-6" : "h-4";
 
-    const [width, setWidth] = useState(0);
+  const [width, setWidth] = useState(0);
 
-    useEffect (() => {
-      const timeout = setTimeout(() => {
-setWidth(percent);
-      }, 100);
-      return () => clearTimeout(timeout);
-    }, [percent]);
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setWidth(percent);
+    }, 100);
+    return () => clearTimeout(timeout);
+  }, [percent]);
 
   return (
-    <div>
+    <div style={{ opacity: hidden ? 0 : 1, transition: "opacity 0.5s ease" }}>
       <h5 className="pb-[0.6rem]">Progress:</h5>
       <div
         className={`w-full border border-black overflow-hidden ${heightClass} ${className}`}
