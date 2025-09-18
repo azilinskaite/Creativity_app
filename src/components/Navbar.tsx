@@ -21,9 +21,11 @@ export default function Navbar() {
             style={{ width: "auto", height: "3rem", objectFit: "contain" }}
           />
         </Link>
-        <div className="md:hidden flex items-center justify-center h-[33px] w-[33px]">
-          <Hamburger size={22} toggled={isMenuOpen} toggle={setIsMenuOpen} />
-        </div>
+        {pathname !== "/" && (
+          <div className="md:hidden flex items-center justify-center h-[33px] w-[33px]">
+            <Hamburger size={22} toggled={isMenuOpen} toggle={setIsMenuOpen} />
+          </div>
+        )}
       </div>
 
       {pathname !== "/" && (
@@ -37,13 +39,19 @@ export default function Navbar() {
         >
           <hr className="border-1 border-black md:hidden" />
           <li className="md:hover:-rotate-15">
-            <Link href="/profile" onClick={() => setIsMenuOpen(false)}>Profile</Link>
+            <Link href="/profile" onClick={() => setIsMenuOpen(false)}>
+              Profile
+            </Link>
           </li>
           <li className="md:hover:-rotate-15">
-            <Link href="/challenges" onClick={() => setIsMenuOpen(false)}>Challenges</Link>
+            <Link href="/challenges" onClick={() => setIsMenuOpen(false)}>
+              Challenges
+            </Link>
           </li>
           <li className="md:hover:-rotate-15">
-            <Link href="/" onClick={() => setIsMenuOpen(false)}>Sign Out</Link>
+            <Link href="/" onClick={() => setIsMenuOpen(false)}>
+              Sign Out
+            </Link>
           </li>
         </ul>
       )}
