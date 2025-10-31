@@ -1,19 +1,15 @@
-"use client";
 import React from "react";
 import SectionHeader from "@/components/SectionHeader";
 import CurrentChallenge from "@/components/CurrentChallenge";
 import Disciplines from "@/components/Disciplines";
 import Footer from "@/components/Footer";
-import { useUser } from "@/hooks/useUser";
 import { RevealOnScroll } from "@/components/RevealOnScroll";
 
 export default function ProfilePage() {
-  const user = useUser();
-  const userName = user?.displayName ?? "user";
 
   return (
     <div>
-      <SectionHeader bg="bg-[var(--bright-red)]">{`Hi ${userName}!`}</SectionHeader>
+      <SectionHeader bg="bg-[var(--bright-red)]" showUser/>
       <div className="p-[1rem] bg-white md:p-[2rem]">
         <p className="max-w-[74ch]">
           Here, you&apos;ll find challenges designed to spark your creativity
