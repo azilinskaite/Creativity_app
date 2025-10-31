@@ -1,9 +1,10 @@
-"use client";
 import Auth from "@/components/Auth";
+import FetchTest from "@/components/FetchTest";
 
 export default function Home() {
   return (
     <div className="relative h-full flex items-center p-[2rem] md:p-[6rem]">
+      <FetchTest/>
       <div
         className="absolute inset-0 w-full h-full bg-center bg-cover opacity-95"
         style={{ backgroundImage: "url('/background.webp')" }}
