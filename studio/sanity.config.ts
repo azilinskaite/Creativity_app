@@ -7,8 +7,8 @@ export default defineConfig({
   name: 'default',
   title: 'Ripple',
 
-  projectId: 've17vww7',
-  dataset: 'dataset',
+  projectId: 'exhjl35f',
+  dataset: 'production',
 
   plugins: [structureTool(), visionTool()],
 
