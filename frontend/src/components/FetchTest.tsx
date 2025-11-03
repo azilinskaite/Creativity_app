@@ -1,9 +1,7 @@
-import { client } from "@/sanity/lib/sanity.client";
-import { getAllDisciplinesQuery } from "@/sanity/lib/queries";
-import type { Disciplines } from "../../sanity.types";
+import { getDisciplines } from "@/actions/getDisciplines";
 
 export default async function FetchTest() {
-  const disciplines = await client.fetch<Disciplines[]>(getAllDisciplinesQuery);
+  const disciplines = await getDisciplines();
 
   return (
     <div className="z-10 w-full flex items-center flex-col justify-between md:flex-row bg-black text-white">
