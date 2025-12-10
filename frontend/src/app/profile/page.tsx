@@ -15,7 +15,7 @@ export default function ProfilePage() {
         <SectionHeader bg="bg-[var(--bright-red)]" showUser/>
         <Moodboard />
         <SectionHeader>Achievements</SectionHeader>
-        <Achievements />
+        {/* <Achievements /> */}
         <SectionHeader>Gallery</SectionHeader>
         <RevealOnScroll>
           <Gallery />

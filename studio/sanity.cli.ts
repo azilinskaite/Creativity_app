@@ -6,10 +6,12 @@ export default defineCliConfig({
     dataset: 'production'
   },
   deployment: {
-    /**
-     * Enable auto-updates for studios.
-     * Learn more at https://www.sanity.io/docs/cli#auto-updates
-     */
     autoUpdates: true,
-  }
-})
+  },
+  typegen: {
+    path: "../frontend/src/**/*.{ts,tsx,js,jsx}",
+    schema: "schema.json",
+    generates: "../frontend/sanity.types.ts",
+    overloadClientMethods: true,
+  },
+});

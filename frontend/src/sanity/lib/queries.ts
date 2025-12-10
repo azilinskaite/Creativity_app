@@ -1,13 +1,8 @@
-import {groq} from 'next-sanity'
+import {defineQuery} from "groq";
 
-export const getAllDisciplinesQuery = groq`*[_type == "disciplines"]{
-  _id,
-  title,
-  description,
-  color,
-  "image": mainImage.asset->url,
-  challenges[]->{
-    _id,
-    text
+export const getAllDisciplinesQuery = defineQuery(`
+  *[_type == "disciplines"]{
+    ...,
+    "image": mainImage.asset->url
   }
-}`
+`);

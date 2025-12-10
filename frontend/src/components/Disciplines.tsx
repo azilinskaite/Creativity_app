@@ -1,15 +1,16 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import disciplinesData from "@/data/disciplines.json";
 import { getSubmissions, Submission } from "@/utils/localStorage";
 import { calculateProgress } from "@/utils/localStorage";
 import ProgressBar from "./ProgressBar";
 import Image from "next/image";
+import { GetAllDisciplinesQueryResult } from "../../sanity.types";
 
 const numCols = 4;
 
-export default function Disciplines() {
+export default function Disciplines({ disciplines }: { disciplines: GetAllDisciplinesQueryResult }) {
   const [submissions, setSubmissions] = useState<Submission[]>([]);
+  
   useEffect(() => {
     setSubmissions(getSubmissions());
   }, []);
@@ -18,7 +19,7 @@ export default function Disciplines() {
     d,
     progressPercent,
   }: {
-    d: (typeof disciplinesData.disciplines)[0];
+    d: GetAllDisciplinesQueryResult[0];
     progressPercent: number;
   }) {
     const [showDescription, setShowDescription] = useState(false);
@@ -49,7 +50,7 @@ export default function Disciplines() {
         onClick={toggleDescription}
       >
         <div className="w-full h-full flex flex-col justify-between">
-          <h2 className="text-xl capitalize mb-[0.4rem]">{d.discipline}</h2>
+          <h2 className="text-xl capitalize mb-[0.4rem]">{d.title}</h2>
           <p
             className={`text-xs mb-[0.4rem] transition-opacity duration-500 ${
               isMobile
@@ -70,22 +71,22 @@ export default function Disciplines() {
 
   return (
     <section className="bg-white grid grid-cols-2 md:grid-cols-4 md:gap-0 md:p-0">
-      {disciplinesData.disciplines.map((d, idx) => {
+      {disciplines.map((discipline, idx) => {
         const progressPercent = calculateProgress(
-          d.discipline,
-          d.challenges.length,
+          discipline.title || "",
+          discipline.challenges?.length || 0,
           submissions
         );
 
         const spacerDiv = (
           <div
             className="hidden h-full w-full md:block relative overflow-hidden"
-            key={`spacer-${d.discipline}`}
+            key={`spacer-${discipline._id}`}
           >
-            {d.background && (
+            {discipline.image && (
               <Image
-                src={d.background}
-                alt={`${d.discipline} background`}
+                src={discipline.image}
+                alt={`${discipline.title} background image`}
                 fill
                 style={{ objectFit: "cover" }}
                 sizes="(min-width: 768px) 100vw"
@@ -98,16 +99,16 @@ export default function Disciplines() {
 
         if (idx % numCols === 2 || idx === 3) {
           return (
-            <React.Fragment key={d.discipline}>
-              <ColoredBox d={d} progressPercent={progressPercent} />
+            <React.Fragment key={discipline._id}>
+              <ColoredBox d={discipline} progressPercent={progressPercent} />
               {spacerDiv}
             </React.Fragment>
           );
         } else {
           return (
-            <React.Fragment key={d.discipline}>
+            <React.Fragment key={discipline._id}>
               {spacerDiv}
-              <ColoredBox d={d} progressPercent={progressPercent} />
+              <ColoredBox d={discipline} progressPercent={progressPercent} />
             </React.Fragment>
           );
         }

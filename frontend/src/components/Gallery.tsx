@@ -2,7 +2,6 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Button from "./Button";
-import disciplinesData from "@/data/disciplines.json";
 import {
   Submission,
   getSubmissions,

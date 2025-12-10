@@ -4,8 +4,10 @@ import CurrentChallenge from "@/components/CurrentChallenge";
 import Disciplines from "@/components/Disciplines";
 import Footer from "@/components/Footer";
 import { RevealOnScroll } from "@/components/RevealOnScroll";
+import { getDisciplines } from "@/actions/getDisciplines";
 
-export default function ProfilePage() {
+export default async function ProfilePage() {
+  const disciplines = await getDisciplines();
 
   return (
     <div>
@@ -20,10 +22,10 @@ export default function ProfilePage() {
         </p>
       </div>
       <SectionHeader>Current challenge</SectionHeader>
-      <CurrentChallenge />
+      {/* <CurrentChallenge /> */}
       <RevealOnScroll>
         <SectionHeader>Your journey</SectionHeader>
-        <Disciplines />
+        <Disciplines disciplines={disciplines}/>
       </RevealOnScroll>
       <Footer />
     </div>
