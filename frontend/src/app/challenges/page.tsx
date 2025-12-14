@@ -12,7 +12,7 @@ export default async function ProfilePage() {
   return (
     <div>
       <SectionHeader bg="bg-[var(--bright-red)]" showUser/>
-      <div className="p-[1rem] bg-white md:p-[2rem]">
+      <div className="p-4 bg-white md:p-8">
         <p className="max-w-[74ch]">
           Here, you&apos;ll find challenges designed to spark your creativity
           and sharpen your mind. Choose a discipline that interests you,

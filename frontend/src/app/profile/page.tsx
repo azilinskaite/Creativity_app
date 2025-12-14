@@ -3,7 +3,7 @@ import SectionHeader from "@/components/SectionHeader";
 import Moodboard from "@/components/Moodboard";
 // import Achievements from "@/components/Achievements";
 import Gallery from "@/components/Gallery";
-import { MoodboardProvider } from "@/components/Moodboard";
+import { MoodboardProvider } from "@/hooks/useMoodboard";
 import Footer from "@/components/Footer";
 import { RevealOnScroll } from "@/components/RevealOnScroll";
 import { getDisciplines } from "@/actions/getDisciplines";

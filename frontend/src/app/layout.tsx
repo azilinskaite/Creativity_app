@@ -7,7 +7,7 @@ import Navbar from "../components/Navbar";
 
 const calSans = Cal_Sans({
   subsets: ["latin"],
-  weight: ["400"],
+  weight: "400",
   variable: "--font-cal-sans",
   display: "swap",
   fallback: ["system-ui", "Arial", "sans-serif"],
@@ -26,11 +26,11 @@ export default function RootLayout({
   return (
     <html lang="en" className={calSans.variable}>
       <body className="min-h-screen flex flex-col">
-        <Navbar />
-        <main style={{ height: "calc(100vh - 4rem)" }} className="flex-grow">
-          {children}
-          <Toaster position="top-center" />
-        </main>
+          <Navbar />
+          <main style={{ height: "calc(100vh - 4rem)" }} className="grow">
+            {children}
+            <Toaster position="top-center" />
+          </main>
       </body>
     </html>
   );
