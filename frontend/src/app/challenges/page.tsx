@@ -1,6 +1,6 @@
 import React from "react";
 import SectionHeader from "@/components/SectionHeader";
-import CurrentChallenge from "@/components/CurrentChallenge";
+// import CurrentChallenge from "@/components/CurrentChallenge";
 import Disciplines from "@/components/Disciplines";
 import Footer from "@/components/Footer";
 import { RevealOnScroll } from "@/components/RevealOnScroll";

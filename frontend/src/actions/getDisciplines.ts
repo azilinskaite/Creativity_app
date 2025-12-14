@@ -1,10 +1,10 @@
 import { client } from "@/sanity/lib/sanity.client";
 import { getAllDisciplinesQuery } from "@/sanity/lib/queries";
-import type { Disciplines } from "../../sanity.types";
+import { GetAllDisciplinesQueryResult } from "../../sanity.types";
 
-export async function getDisciplines(): Promise<Disciplines[]> {
+export async function getDisciplines(): Promise<GetAllDisciplinesQueryResult> {
   try {
-    const data = await client.fetch<Disciplines[]>(getAllDisciplinesQuery, {}, {
+    const data = await client.fetch<GetAllDisciplinesQueryResult>(getAllDisciplinesQuery, {}, {
       next: { revalidate: 60 },
     });
     return data;

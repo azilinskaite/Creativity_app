@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { getSubmissions, Submission } from "@/utils/localStorage";
-import disciplinesData from "@/data/disciplines.json";
 import ProgressBar from "./ProgressBar";
 
 function calculateProgress(disciplineName: string, totalChallenges: number, submissions: Submission[]) {
@@ -16,11 +15,11 @@ export default function Achievements() {
     setSubmissions(getSubmissions());
   }, []);
 
-  const startedDisciplines = disciplinesData.disciplines.filter((discipline) =>
-    submissions.some((sub) => sub.discipline === discipline.discipline)
-  );
+  // const startedDisciplines = disciplinesData.disciplines.filter((discipline) =>
+  //   submissions.some((sub) => sub.discipline === discipline.discipline)
+  // );
 
-    if (startedDisciplines.length === 0) {
+    // if (startedDisciplines.length === 0) {
     return (
       <section className=" bg-white flex items-center justify-center h-[12rem] text-center p-4 rounded-md">
         <p className="text-gray-400 text-lg">
@@ -29,27 +28,27 @@ export default function Achievements() {
         </p>
       </section>
     );
-  }
+  // }
 
-  return (
-    <section className="bg-white grid grid-cols-2 md:grid-cols-4 md:gap-0 md:p-0">
-      {startedDisciplines.map((d) => {
-        const progressPercent = calculateProgress(
-          d.discipline,
-          d.challenges.length,
-          submissions
-        );
-        return (
-          <div
-            key={d.discipline}
-            className="flex flex-col items-left justify-between px-[2rem] py-[1rem] gap-[1rem]"
-            style={{ backgroundColor: d.color }}
-          >
-            <h2 className="capitalize text-xl mb-[0.5rem]">{d.discipline}</h2>
-            <ProgressBar percent={progressPercent} colorFill="black" />
-          </div>
-        );
-      })}
-    </section>
-  );
+  // return (
+  //   <section className="bg-white grid grid-cols-2 md:grid-cols-4 md:gap-0 md:p-0">
+  //     {startedDisciplines.map((d) => {
+  //       const progressPercent = calculateProgress(
+  //         d.discipline,
+  //         d.challenges.length,
+  //         submissions
+  //       );
+  //       return (
+  //         <div
+  //           key={d.discipline}
+  //           className="flex flex-col items-left justify-between px-[2rem] py-[1rem] gap-[1rem]"
+  //           style={{ backgroundColor: d.color }}
+  //         >
+  //           <h2 className="capitalize text-xl mb-[0.5rem]">{d.discipline}</h2>
+  //           <ProgressBar percent={progressPercent} colorFill="black" />
+  //         </div>
+  //       );
+  //     })}
+  //   </section>
+  // );
 }

@@ -1,13 +1,15 @@
 import React from "react";
 import SectionHeader from "@/components/SectionHeader";
 import Moodboard from "@/components/Moodboard";
-import Achievements from "@/components/Achievements";
+// import Achievements from "@/components/Achievements";
 import Gallery from "@/components/Gallery";
 import { MoodboardProvider } from "@/components/Moodboard";
 import Footer from "@/components/Footer";
 import { RevealOnScroll } from "@/components/RevealOnScroll";
+import { getDisciplines } from "@/actions/getDisciplines";
 
-export default function ProfilePage() {
+export default async function ProfilePage() {
+  const disciplines = await getDisciplines();
 
   return (
     <div>
@@ -18,7 +20,7 @@ export default function ProfilePage() {
         {/* <Achievements /> */}
         <SectionHeader>Gallery</SectionHeader>
         <RevealOnScroll>
-          <Gallery />
+          <Gallery disciplines={disciplines}/>
         </RevealOnScroll>
       </MoodboardProvider>
       <Footer />

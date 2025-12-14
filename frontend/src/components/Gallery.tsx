@@ -8,8 +8,9 @@ import {
   updateSubmission,
   deleteSubmission,
 } from "@/utils/localStorage";
+import { GetAllDisciplinesQueryResult } from "../../sanity.types";
 
-export default function Gallery() {
+export default function Gallery({ disciplines }: { disciplines: GetAllDisciplinesQueryResult }) {
   const [submissions, setSubmissions] = useState<Submission[]>([]);
   const [selected, setSelected] = useState<Submission | null>(null);
   const [isEditing, setIsEditing] = useState(false);
@@ -27,15 +28,8 @@ export default function Gallery() {
     }
   }, [selected]);
 
-  function getChallengeText(discipline: string, challengeId: string) {
-    const disciplineObj = disciplinesData.disciplines.find(
-      (d) => d.discipline === discipline
-    );
-    if (!disciplineObj) return "";
-    const challengeObj = disciplineObj.challenges.find(
-      (c) => c.id === challengeId
-    );
-    return challengeObj ? challengeObj.text : "";
+  function getChallengeText(submission: Submission) {
+    return submission.challengeText || "";
   }
 
   return (
@@ -104,7 +98,7 @@ export default function Gallery() {
             </h2>
             <p className="text-sm text-[var(--foreground)]">
               Challenge: <br />
-              {getChallengeText(selected.discipline, selected.challengeId)}
+              {getChallengeText(selected)}
             </p>
 
             {isEditing ? (
@@ -155,7 +149,7 @@ export default function Gallery() {
             )}
             <div className="flex gap-[0.5rem] mt-[4rem]">
             <Button
-              variant="secondary" 
+              variant="secondary"
               size="short"
               onClick={() => {
                 if (selected) {

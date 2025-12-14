@@ -1,15 +1,15 @@
-// "use client";
-// import React, { useState, useEffect } from "react";
+"use client";
+import React, { useState, useEffect } from "react";
 // import toast from "react-hot-toast";
-// import ChallengeBox from "./ChallengeBox";
-// import ChallengeSubmitBox from "./ChallengeSubmitBox";
-// import Modal from "./Modal";
-// import Button from "./Button";
-// import Image from "next/image";
+import ChallengeBox from "./ChallengeBox";
+import ChallengeSubmitBox from "./ChallengeSubmitBox";
+import Modal from "./Modal";
+import Button from "./Button";
+import Image from "next/image";
 // import { saveSubmission } from "@/utils/localStorage";
 // import usePendingChallenge from "@/hooks/usePendingChallenge";
 
-// export default function CurrentChallenge() {
+export default function CurrentChallenge() {
 //   const { pendingChallenge, savePending, clearPending } = usePendingChallenge();
 
 //   const selectedDisciplineIndex = pendingChallenge?.disciplineIndex ?? -1;
@@ -98,95 +98,95 @@
 //     clearPending();
 //   }
 
-//   return (
-//     <>
-//       <section className="bg-white grid grid-cols-1 md:grid-cols-2">
-//         <div className="p-[1rem] mb-[1rem] md:p-[2rem]">
-//           <h5 className="mb-[1rem]" style={{ textTransform: "capitalize" }}>
-//             Part of: {discipline?.discipline ?? "not selected"}
-//           </h5>
-//           {challengeVisible && challenge ? (
-//             <ChallengeBox
-//               challenge={challenge.text}
-//               color={discipline?.color ?? "white"}
-//             />
-//           ) : (
-//             <ChallengeBox
-//               challenge="No challenge selected"
-//               color={discipline?.color ?? "var(--beige)"}
-//             />
-//           )}
-//         </div>
-//         <ChallengeSubmitBox
-//           onGetChallenge={handleGetChallenge}
-//           onSubmitChallenge={handleOpenSubmitModal}
-//           background={discipline?.background ?? "var(--beige)"}
-//           hasPendingChallenge={pendingChallenge !== null}
-//         />
+  return (
+    <>
+      <section className="bg-white grid grid-cols-1 md:grid-cols-2">
+        <div className="p-[1rem] mb-[1rem] md:p-[2rem]">
+          <h5 className="mb-[1rem]" style={{ textTransform: "capitalize" }}>
+            {/* Part of: {discipline?.discipline ?? "not selected"} */}
+          </h5>
+          {/* {challengeVisible && challenge ? (
+            <ChallengeBox
+              challenge={challenge.text}
+              color={discipline?.color ?? "white"}
+            />
+          ) : (
+            <ChallengeBox
+              challenge="No challenge selected"
+              color={discipline?.color ?? "var(--beige)"}
+            />
+          )} */}
+        </div>
+        {/* <ChallengeSubmitBox
+          onGetChallenge={handleGetChallenge}
+          onSubmitChallenge={handleOpenSubmitModal}
+          background={discipline?.background ?? "var(--beige)"}
+          hasPendingChallenge={pendingChallenge !== null}
+        /> */}
 
-//         <Modal isOpen={isSubmitModalOpen} onClose={handleCloseSubmitModal}>
-//           <div className="flex flex-col items-center gap-[1rem]">
-//             <h2>Submit challenge by uploading a photo</h2>
-//             <input
-//               type="file"
-//               accept="image/*"
-//               id="upload-photo"
-//               onChange={handleImageFileChange}
-//               className="hidden"
-//             />
+        {/* <Modal isOpen={isSubmitModalOpen} onClose={handleCloseSubmitModal}>
+          <div className="flex flex-col items-center gap-[1rem]">
+            <h2>Submit challenge by uploading a photo</h2>
+            <input
+              type="file"
+              accept="image/*"
+              id="upload-photo"
+              onChange={handleImageFileChange}
+              className="hidden"
+            />
 
-//             <label
-//               htmlFor="upload-photo"
-//               className="cursor-pointer bg-(--beige) hover:bg-(--bright-red) px-4 py-2 rounded-lg"
-//             >
-//               Upload a photo
-//             </label>
-//             <textarea
-//               value={comment}
-//               onChange={(e) => setComment(e.target.value)}
-//               placeholder="Thoughts about the challenge"
-//               className="border p-[0.5rem] mx-[1rem] rounded-md w-full max-w-sm"
-//               rows={3}
-//             />
-//             {uploadedImage && (
-//               <div className="relative w-64 h-64 rounded-lg overflow-hidden">
-//                 <Image
-//                   src={uploadedImage}
-//                   alt="Preview"
-//                   fill
-//                   style={{ objectFit: "contain" }}
-//                   priority
-//                 />
-//               </div>
-//             )}
-//             <Button
-//               variant="primary"
-//               onClick={handleSaveSubmission}
-//               size="short"
-//               disabled={!uploadedImage}
-//             >
-//               Save
-//             </Button>
-//           </div>
-//         </Modal>
-//       </section>
+            <label
+              htmlFor="upload-photo"
+              className="cursor-pointer bg-(--beige) hover:bg-(--bright-red) px-4 py-2 rounded-lg"
+            >
+              Upload a photo
+            </label>
+            <textarea
+              value={comment}
+              onChange={(e) => setComment(e.target.value)}
+              placeholder="Thoughts about the challenge"
+              className="border p-[0.5rem] mx-[1rem] rounded-md w-full max-w-sm"
+              rows={3}
+            />
+            {uploadedImage && (
+              <div className="relative w-64 h-64 rounded-lg overflow-hidden">
+                <Image
+                  src={uploadedImage}
+                  alt="Preview"
+                  fill
+                  style={{ objectFit: "contain" }}
+                  priority
+                />
+              </div>
+            )}
+            <Button
+              variant="primary"
+              onClick={handleSaveSubmission}
+              size="short"
+              disabled={!uploadedImage}
+            >
+              Save
+            </Button>
+          </div>
+        </Modal> */}
+      </section>
 
-//       <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
-//         <h3 className="text-xl mb-4">Select a discipline</h3>
-//         <ul className="grid grid-cols-2 gap-2">
-//           {disciplinesData.disciplines.map((d, idx) => (
-//             <li key={d.discipline}>
-//               <button
-//                 className="px-4 py-2 pb-[3rem] w-full text-left capitalize"
-//                 style={{ backgroundColor: d.color }}
-//                 onClick={() => handleDisciplineSelect(idx)}
-//               >
-//                 {d.discipline}
-//               </button>
-//             </li>
-//           ))}
-//         </ul>
-//       </Modal>
-//     </>
-//   );
-// }
+      {/* <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
+        <h3 className="text-xl mb-4">Select a discipline</h3>
+        <ul className="grid grid-cols-2 gap-2">
+          {disciplinesData.disciplines.map((d, idx) => (
+            <li key={d.discipline}>
+              <button
+                className="px-4 py-2 pb-[3rem] w-full text-left capitalize"
+                style={{ backgroundColor: d.color }}
+                onClick={() => handleDisciplineSelect(idx)}
+              >
+                {d.discipline}
+              </button>
+            </li>
+          ))}
+        </ul>
+      </Modal> */}
+    </>
+  );
+}
