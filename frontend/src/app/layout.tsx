@@ -10,6 +10,7 @@ const calSans = Cal_Sans({
   weight: ["400"],
   variable: "--font-cal-sans",
   display: "swap",
+  fallback: ["system-ui", "Arial", "sans-serif"],
 });
 
 export const metadata: Metadata = {
@@ -23,7 +24,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={calSans.className}>
+    <html lang="en" className={calSans.variable}>
       <body className="min-h-screen flex flex-col">
         <Navbar />
         <main style={{ height: "calc(100vh - 4rem)" }} className="flex-grow">
