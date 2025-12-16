@@ -1,36 +1,32 @@
 {
-  "name": "creativity_app",
-  "version": "0.1.0",
+  "name": "ripple-monorepo",
+  "description": "Next.js + Sanity monorepo",
   "private": true,
+  "workspaces": [
+    "studio",
+    "frontend"
+  ],
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "dev": "npm-run-all --parallel --print-label dev:*",
+    "dev:next": "npm run dev --workspace=frontend",
+    "dev:studio": "npm run dev --workspace=studio",
+    "build:frontend": "npm run build --workspace=creativity_app",
+    "format": "prettier --cache --write .",
+    "import-sample-data": "cd studio && sanity dataset import sample-data.tar.gz --replace",
+    "lint": "npm run lint --workspace=frontend",
+    "type-check": "npm run type-check --workspaces"
+  },
+  "prettier": "@sanity/prettier-config",
+  "devDependencies": {
+    "@sanity/prettier-config": "^2.0.1",
+    "@types/styled-components": "^5.1.36",
+    "npm-run-all2": "^5.0.2",
+    "prettier": "^3.6.2"
   },
   "dependencies": {
-    "firebase": "^12.2.1",
-    "hamburger-react": "^2.5.2",
-    "next": "15.4.6",
-    "react": "19.1.0",
-    "react-dom": "19.1.0",
-    "react-hot-toast": "^2.6.0"
-  },
-  "devDependencies": {
-    "@eslint/eslintrc": "^3",
-    "@tailwindcss/postcss": "^4.1.11",
-    "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "@vitest/browser": "^3.2.4",
-    "@vitest/coverage-v8": "^3.2.4",
-    "autoprefixer": "^10.4.21",
-    "eslint": "^9",
-    "eslint-config-next": "15.4.6",
-    "playwright": "^1.54.2",
-    "postcss": "^8.5.6",
-    "tailwindcss": "^4.1.11",
-    "typescript": "^5",
-    "vitest": "^3.2.4"
+    "next": "16.0.10",
+    "react": "^19.2.1",
+    "react-dom": "^19.2.1",
+    "styled-components": "^6.1.19"
   }
 }
