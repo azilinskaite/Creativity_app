@@ -12,18 +12,19 @@ export default async function ProfilePage() {
   const disciplines = await getDisciplines();
 
   return (
-    <div>
-      <MoodboardProvider>
-        <SectionHeader bg="bg-[var(--bright-red)]" showUser/>
-        <Moodboard />
-        <SectionHeader>Achievements</SectionHeader>
-        {/* <Achievements /> */}
-        <SectionHeader>Gallery</SectionHeader>
-        <RevealOnScroll>
-          <Gallery disciplines={disciplines}/>
-        </RevealOnScroll>
-      </MoodboardProvider>
-      <Footer />
-    </div>
+    <h1>profile</h1>
+    // <div>
+    //   <MoodboardProvider>
+    //     <SectionHeader bg="bg-[var(--bright-red)]" showUser/>
+    //     <Moodboard />
+    //     <SectionHeader>Achievements</SectionHeader>
+    //     {/* <Achievements /> */}
+    //     <SectionHeader>Gallery</SectionHeader>
+    //     <RevealOnScroll>
+    //       <Gallery disciplines={disciplines}/>
+    //     </RevealOnScroll>
+    //   </MoodboardProvider>
+    //   <Footer />
+    // </div>
   );
 }

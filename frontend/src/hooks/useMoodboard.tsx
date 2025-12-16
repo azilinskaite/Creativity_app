@@ -19,13 +19,19 @@ const MoodboardContext = createContext<MoodboardContextType | undefined>(
 
 export function MoodboardProvider({ children }: { children: ReactNode }) {
   const maxImages = 6;
-  const [images, setImages] = useState<(string | null)[]>(() => {
+  const [images, setImages] = useState<(string | null)[]>(
+    () => Array(maxImages).fill(null)
+  );
+
+  useEffect(() => {
     const stored = getMoodboardImages();
     if (stored && Array.isArray(stored)) {
-      return [...stored, ...Array(maxImages - stored.length).fill(null)];
+      setImages([
+        ...stored,
+        ...Array(maxImages - stored.length).fill(null),
+      ]);
     }
-    return Array(maxImages).fill(null);
-  });
+  }, []);
 
   useEffect(() => {
     saveMoodboardImages(images);
@@ -41,11 +47,7 @@ export function MoodboardProvider({ children }: { children: ReactNode }) {
 export function useMoodboard() {
   const context = useContext(MoodboardContext);
   if (!context) {
-    // Return default values during SSR or when context is not available
-    return {
-      images: Array(6).fill(null),
-      setImages: () => {},
-    };
+    throw new Error("useMoodboard must be used within a MoodboardProvider");
   }
   return context;
 }
